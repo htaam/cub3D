@@ -12,12 +12,11 @@
 
 #include "cub3d.h"
 
-int	get_distance(int *xyz1, int *xyz2)
+int	get_distance(int *xy1, int *xy2)
 {
 	int	c;
 
-	c = sqrt(pow((xyz1[0] - xyz2[0]), 2) + (pow((xyz1[1] - xyz2[1]), 2))
-		+ (pow((xyz1[2] - xyz2[2]), 2)));
+	c = sqrt(pow((xy1[0] - xy2[0]), 2) + (pow((xy1[1] - xy2[1]), 2)));
 	return (c);
 }
 

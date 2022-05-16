@@ -1,9 +1,10 @@
 #include "cub3d.h"
 
 
+
 void	init_stuff(t_vars *vars)
 {
-	int x_max = 1920;
+	int x_max = 1080;
 	int y_max = 1080;
 	
     vars->mlx = mlx_init();
@@ -14,6 +15,16 @@ void	init_stuff(t_vars *vars)
 	vars->image.addr = mlx_get_data_addr(vars->image.img,
 			&vars->image.bits_per_pixel,
 			&vars->image.line_length, &vars->image.endian);
+}
+
+int max_height(int wall_distance)
+{
+    return (1080/2 - wall_distance / 2);
+}
+
+int min_height(int wall_distance)
+{
+    return(wall_distance / 2 + 1080/2); 
 }
 
 int	main(int argc, char **argv)
@@ -27,15 +38,33 @@ int	main(int argc, char **argv)
     (void)argc;
     int x = 0;
     int y = 0;
+    int wall_distances[1080];
 
-    while (x++ < 1079)
+    int i = 0;
+    while (i< 1079)
     {
-        y = 0;
-        while (y++ < 1079)
+        int j = 0;
+
+        while(j++ < 100)
         {
-            my_mlx_pixel_put(&vars.image, x,
-					y, (create_trgb(0, 2.5 * (x*y) + 50,
-							2.5 * (x/y), 0.3 * (x%y + 2))));
+            wall_distances[i + j] = i;
+        }
+        i = i + j - 1;
+    }
+
+
+
+    while (y++ < 1079)
+    {
+        x = 0;
+        while (x++ < 1079)
+        {
+            if (y  <= (min_height(wall_distances[x])) && y >= max_height(wall_distances[x]))
+            {
+                my_mlx_pixel_put(&vars.image, x,
+					y, (create_trgb(0, (50),
+							255, 0)));
+            }
         }
     }
     mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
