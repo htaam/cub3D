@@ -8,21 +8,19 @@ int create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void drawPlayer(t_game *game, int a, int b)
+void drawPlayer(t_game *game)
 {
-	game->player.x = 300 + a;
-	game->player.y = 300 + b;
 	game->player.width = 8;
 	game->player.height = 8;
 	int color = create_trgb(0, 255, 204, 0);
-	int i = game->player.y;
+	int i = game->player.posY;
 	int j;
 	if (game->mlx_win == NULL)
 		return ;
-	while (i < game->player.width + game->player.y)
+	while (i < game->player.width + game->player.posY)
 	{
-		j = game->player.x;
-		while (j < game->player.height + game->player.x)
+		j = game->player.posX;
+		while (j < game->player.height + game->player.posX)
 			mlx_pixel_put(game->mlx, game->mlx_win, j++, i, color);
 		++i;
 	}
@@ -39,22 +37,25 @@ void render_background(t_game *game)
 	{
 		j = 0;
 		while (j < 1024)
-			mlx_pixel_put(game->mlx, game->mlx_win, j++, i, color);
+		{
+			mlx_pixel_put(game->mlx, game->mlx_win, j++, i, color);	
+		}
 		++i;
 	}
 }
 
 int main(int argc, char *argv[])
 {
-	(void) argc;
-	(void) argv;
 	t_game game;
 
-	game.mlx = mlx_init();
-	game.mlx_win = mlx_new_window(game.mlx, 1024, 512, "Cub3d");
+	if (argc != 2)
+		return (0);
+	init_vars(&game);
+	read_map(&game, argv[1]);
+	init_display(&game);
 	mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);
 	render_background(&game);
-	drawPlayer(&game, 0, 0);
+	drawPlayer(&game);
 	mlx_hook(game.mlx_win, 2, (1L << 0), &handle_keypress, &game);
 	mlx_loop(game.mlx);
 }

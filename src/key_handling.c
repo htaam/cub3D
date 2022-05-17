@@ -4,26 +4,26 @@
 
 void	down(t_game *game)
 {
-	++game->player.y;
-	drawPlayer(game, 0, 5);
+	++game->player.posY;
+	drawPlayer(game);
 }
 
 void	right(t_game *game)
 {
-	++game->player.x;
-	drawPlayer(game, 5, 0);
+	++game->player.posX;
+	drawPlayer(game);
 }
 
 void	up(t_game *game)
 {
-	--game->player.y;
-	drawPlayer(game, 0, -5);
+	--game->player.posY;
+	drawPlayer(game);
 }
 
 void	left(t_game *game)
 {
-	--game->player.x;
-	drawPlayer(game, -5, 0);
+	--game->player.posX;
+	drawPlayer(game);
 }
 
 int	handle_keypress(int key_code, t_game *game)

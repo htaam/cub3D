@@ -20,10 +20,15 @@
 # include "../libs/libft/src/libft.h"
 # include "mlx_keys.h"
 
+#define mapWidth 24
+#define mapHeight 24
+#define screenWidth 640
+#define screenHeight 480
+
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	int	posX;
+	int	posY;
 	int width;
 	int height;
 	int	direct;
@@ -53,7 +58,7 @@ int		board_elements(t_game *game);
 
 // Board
 void	init_board(t_game *game);
-void	read_board(t_game *game, char *board);
+void	read_map(t_game *game, char *board);
 void	draw_background(t_game *game);
 void	init_player(t_game *game, int y, int x);
 void	draw_board(t_game *game);
@@ -73,6 +78,10 @@ void	counter_moves(t_game *game);
 
 
 //Cub3d
-void drawPlayer(t_game *game, int a, int b);
+void	drawPlayer(t_game *game);
+void	render_background(t_game *game);
+void	init_display(t_game *game);
+
+
 
 #endif
