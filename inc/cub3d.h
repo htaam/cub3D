@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "../libs/minilibx-linux/mlx.h"
-# include "../libs/minilibx_opengl_20191021/mlx.h"
+//# include "../libs/minilibx_opengl_20191021/mlx.h"
 # include "../libs/libft/src/libft.h"
 # include "mlx_keys.h"
 
@@ -24,6 +24,8 @@ typedef struct s_player
 {
 	int	x;
 	int	y;
+	int width;
+	int height;
 	int	direct;
 	int	count;
 }				t_player;
@@ -42,47 +44,35 @@ typedef struct s_game
 void	init_game(t_game *game);
 void	init_vars(t_game *game);
 void	init_img(t_game *game);
+
 // Check Board
 void	count_board_units(t_game *game, char *board);
 void	check_board_form(t_game *game, char *line, size_t len);
 int		board_close(t_game *game);
 int		board_elements(t_game *game);
+
 // Board
 void	init_board(t_game *game);
 void	read_board(t_game *game, char *board);
 void	draw_background(t_game *game);
 void	init_player(t_game *game, int y, int x);
 void	draw_board(t_game *game);
+
 //	Key_Actions
 int		handle_keypress(int key_code, t_game *game);
 void	up(t_game *game);
 void	left(t_game *game);
 void	down(t_game *game);
 void	right(t_game *game);
-// Update
-void	update_game_state(t_game *game, int x, int y);
-void	update_enemy(t_game *game, int y, int x);
-void	update_map(int past_tile_y, int past_tile_x, t_game *game);
-void	update_collectibles(t_game *game);
-// Convert
-void	convert_to_collectible(int past_tile_x, int past_tile_y, t_game *game);
-void	convert_to_player(int new_tile_x, int new_tile_y, t_game *game);
-void	convert_to_enemy(t_game *game);
-void	convert_to_path(int past_tile_x, int past_tile_y, t_game *game);
-void	convert_to_exit(int new_tile_x, int new_tile_y, t_game *game);
-//	Enemy
-void	init_enemy(t_game *game, int y, int x);
-void	enemy_actions(t_game *game, int key_code);
-int		move_enemy(t_game *game, int x, int y);
-//	Animations
-void	enemy_animation(t_game *game);
-void	collectibles_animation(t_game *game);
-void	player_animation(t_game *game);
-void	player_animations_right(t_game *game);
-void	player_animations_left(t_game *game);
+
+
 // Utils
-void	game_exit(t_game *game, char *message);
+//void	game_exit(t_game *game, char *message);
 int		x_close(t_game *game);
 void	counter_moves(t_game *game);
+
+
+//Cub3d
+void drawPlayer(t_game *game, int a, int b);
 
 #endif

@@ -10,11 +10,10 @@ void print_board(t_game *game)
 }
 
 // Exits the game and frees memory
-void	game_exit(t_game *game, char *message)
+int	x_close(t_game *game)
 {
 	int	i;
 
-	ft_putstr_fd(message, 1);
 	i = -1;
 	while (++i < game->board_height)
 		if (game->board && game->board[i])
@@ -37,7 +36,7 @@ void	count_board_units(t_game *game, char *board)
 	game->board_width = 0;
 	fd = open(board, O_RDONLY);
 	if (!fd)
-		game_exit(game, "No board");
+		x_close(game);
 	while (get_next_line(fd, &line))
 	{
 		if (!game->board_width)
@@ -84,15 +83,15 @@ void	init_vars(t_game *game)
 // Read map .ber file
 // Print board to check it was saved correctly
 // Exit program and frees memory 
-int	main(int argc, char *argv[])
-{
-	t_game	game;
-
-	if (argc != 2)
-		return (0);
-	init_vars(&game);
-	read_map(&game, argv[1]);
-    print_board(&game);
-    game_exit(&game, "EXIT\n");
-	return (0);
-}
+//int	main(int argc, char *argv[])
+//{
+//	t_game	game;
+//
+//	if (argc != 2)
+//		return (0);
+//	init_vars(&game);
+//	read_map(&game, argv[1]);
+//    print_board(&game);
+//    //x_close(&game);
+//	return (0);
+//}
