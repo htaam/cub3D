@@ -8,11 +8,11 @@ void	init_display(t_game *game)
 	game->player.posX = 22; 
 	game->player.posY = 12; 
 	//// Initial direction vectors 
-	//double dirX = -1; 
-	//double dirY = 0;
+	game->player.dirX = -1; 
+	game->player.dirY = 0;
 	//// 2d raycaster "camera plane"
-	//double planeX = 0;
-	//double planeY = 0.66;
+	game->player.planeX = 0;
+	game->player.planeY = 0.66;
 //
 	//// time of current time
 	//double time = 0;

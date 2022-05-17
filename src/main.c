@@ -1,97 +1,62 @@
 #include "cub3d.h"
 #include "stdio.h"
+#include "stdlib.h"
 
-// Prints board
-void print_board(t_game *game)
+// Display color
+int create_trgb(int t, int r, int g, int b)
 {
-    int i = -1;
-	while (++i < game->board_height)
-        printf("%s\n", game->board[i]);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-// Exits the game and frees memory
-int	x_close(t_game *game)
+void drawPlayer(t_game *game)
 {
-	int	i;
-
-	i = -1;
-	while (++i < game->board_height)
-		if (game->board && game->board[i])
-			free(game->board[i]);
-	if (game->board)
-		free(game->board);
-	if (game->mlx_win)
-		free(game->mlx_win);
-	if (game->mlx)
-		free(game->mlx);
-	exit(EXIT_SUCCESS);
-}
-
-// Counts width and height of the board
-void	count_board_units(t_game *game, char *board)
-{
-	int		fd;
-	char	*line;
-
-	game->board_width = 0;
-	fd = open(board, O_RDONLY);
-	if (!fd)
-		x_close(game);
-	while (get_next_line(fd, &line))
+	game->player.width = 8;
+	game->player.height = 8;
+	int color = create_trgb(0, 255, 204, 0);
+	int i = game->player.posY;
+	int j;
+	if (game->mlx_win == NULL)
+		return ;
+	while (i < game->player.width + game->player.posY)
 	{
-		if (!game->board_width)
-			game->board_width = ft_strlen(line);
-		++game->board_height;
+		j = game->player.posX;
+		while (j < game->player.height + game->player.posX)
+			mlx_pixel_put(game->mlx, game->mlx_win, j++, i, color);
+		++i;
 	}
-	free(line);
-	close(fd);
 }
 
-// Read map and stores in the game->board struct
-void	read_map(t_game *game, char *board)
+void render_background(t_game *game)
 {
-	int		fd;
-	char	*line;
-	int		ret;
-	int		y;
-
-	y = 0;
-	count_board_units(game, board);
-	ret = 1;
-	fd = open(board, O_RDONLY);
-	game->board = ft_calloc(game->board_height, sizeof(char *));
-	while (ret > 0)
+	int color = create_trgb(30, 30, 30, 30);
+	int i = 0;
+	int j;
+	if (game->mlx_win == NULL)
+		return ;
+	while (i < 512)
 	{
-        ret = get_next_line(fd, &line);
-		if (ft_strlen(line) > 0)
-			game->board[y++] = line;
-		else
-			free(line);
+		j = 0;
+		while (j < 1024)
+		{
+			mlx_pixel_put(game->mlx, game->mlx_win, j++, i, color);	
+		}
+		++i;
 	}
-	close(fd);
 }
 
-// Init necessary board variables
-void	init_vars(t_game *game)
+int main(int argc, char *argv[])
 {
-	game->board = 0;
-	game->board_width = 0;
-	game->board_height = 0;
-}
+	t_game game;
 
-// Init necessary variables
-// Read map .ber file
-// Print board to check it was saved correctly
-// Exit program and frees memory 
-//int	main(int argc, char *argv[])
-//{
-//	t_game	game;
-//
-//	if (argc != 2)
-//		return (0);
-//	init_vars(&game);
-//	read_map(&game, argv[1]);
-//    print_board(&game);
-//    //x_close(&game);
-//	return (0);
-//}
+	if (argc != 2)
+		return (0);
+	init_vars(&game);
+	read_map(&game, argv[1]);
+	init_display(&game);
+	mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);
+	render_background(&game);
+	drawPlayer(&game);
+	raycast(&game);
+	mlx_hook(game.mlx_win, 2, (1L << 0), &handle_keypress, &game);
+	mlx_loop(game.mlx);
+}

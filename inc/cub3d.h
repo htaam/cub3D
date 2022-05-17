@@ -27,8 +27,15 @@
 
 typedef struct s_player
 {
+	//// Initial player position
 	int	posX;
 	int	posY;
+	//// Initial direction vectors 
+	double dirX; 
+	double dirY;
+	//// 2d raycaster "camera plane"
+	double planeX;
+	double planeY;
 	int width;
 	int height;
 	int	direct;
@@ -81,7 +88,6 @@ void	counter_moves(t_game *game);
 void	drawPlayer(t_game *game);
 void	render_background(t_game *game);
 void	init_display(t_game *game);
-
-
+void	raycast(t_game *game);
 
 #endif
