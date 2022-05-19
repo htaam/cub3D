@@ -2,6 +2,12 @@
 #include "stdio.h"
 #include "stdlib.h"
 
+int error_exit(char *message)
+{
+	printf("%s\n", message);
+	exit(EXIT_FAILURE);
+}
+
 // Display color
 int create_trgb(int t, int r, int g, int b)
 {
@@ -46,17 +52,19 @@ void render_background(t_game *game)
 
 int main(int argc, char *argv[])
 {
-	t_game game;
+	//t_game game;
+	if (check_args(argc, argv) != 0)
+		return (1);
 
-	if (argc != 2)
-		return (0);
-	init_vars(&game);
-	read_map(&game, argv[1]);
-	init_display(&game);
-	mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);
-	render_background(&game);
-	drawPlayer(&game);
-	raycast(&game);
-	mlx_hook(game.mlx_win, 2, (1L << 0), &handle_keypress, &game);
-	mlx_loop(game.mlx);
+	//init_vars(&game);
+	//read_map(&game, argv[1]);
+	//count_identifiers(&game);
+	//init_display(&game);
+	//mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);
+	//render_background(&game);
+	//drawPlayer(&game);
+	//raycast(&game);
+	//mlx_hook(game.mlx_win, 2, (1L << 0), &handle_keypress, &game);
+	//mlx_loop(game.mlx);
+	return (0);
 }

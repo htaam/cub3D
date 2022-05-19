@@ -42,14 +42,20 @@ typedef struct s_player
 	int	count;
 }				t_player;
 
+//typedef struct s_cub
+//{
+//	
+//
+//}			t_cub;
+
 typedef struct s_game
 {
 	t_player	player;
 	void		*mlx;
 	void		*mlx_win;
 	char		**board;
-	int			board_width;
 	int			board_height;
+	int			board_width[1000];
 }				t_game;
 
 //	so_long
@@ -89,5 +95,9 @@ void	drawPlayer(t_game *game);
 void	render_background(t_game *game);
 void	init_display(t_game *game);
 void	raycast(t_game *game);
+int		error_exit(char *message);
+int		check_args(int argc, char *argv[]);
+int		check_extension (char *argv);
+
 
 #endif

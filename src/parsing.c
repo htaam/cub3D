@@ -1,6 +1,12 @@
 #include "cub3d.h"
 #include "stdio.h"
 
+//void count_identifiers(t_game *game)
+//{
+//	int	idtypes[6];
+//
+//}
+
 // Prints board
 void print_board(t_game *game)
 {
@@ -32,16 +38,17 @@ void	count_board_units(t_game *game, char *board)
 {
 	int		fd;
 	char	*line;
+	int i = 0;
 
-	game->board_width = 0;
 	fd = open(board, O_RDONLY);
 	if (!fd)
 		x_close(game);
 	while (get_next_line(fd, &line))
 	{
-		if (!game->board_width)
-			game->board_width = ft_strlen(line);
+		game->board_width[i] = ft_strlen(line);
 		++game->board_height;
+		printf("%i\n", game->board_width[i]);
+		++i;
 	}
 	free(line);
 	close(fd);
@@ -75,6 +82,5 @@ void	read_map(t_game *game, char *board)
 void	init_vars(t_game *game)
 {
 	game->board = 0;
-	game->board_width = 0;
 	game->board_height = 0;
 }
