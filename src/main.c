@@ -52,10 +52,11 @@ void render_background(t_game *game)
 
 int main(int argc, char *argv[])
 {
-	//t_game game;
+	t_game game;
 	if (check_args(argc, argv) != 0)
 		return (1);
-
+	if (check_map(argv[1], &game) != 0)
+		return (1);
 	//init_vars(&game);
 	//read_map(&game, argv[1]);
 	//count_identifiers(&game);
