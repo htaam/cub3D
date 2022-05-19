@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include <stdlib.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include "../libs/minilibx-linux/mlx.h"
 //# include "../libs/minilibx_opengl_20191021/mlx.h"
@@ -97,12 +96,8 @@ void	render_background(t_game *game);
 void	init_display(t_game *game);
 void	raycast(t_game *game);
 int		error_exit(char *message);
-// CHECK ARGS
 int		check_args(int argc, char *argv[]);
 int		check_extension (char *argv);
-int		check_argument_file(char *file);
-// CHECK MAP
-int	check_map(char *file, t_game *game);
 
 
 #endif
