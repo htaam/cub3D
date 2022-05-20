@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 12:29:40 by mmota             #+#    #+#             */
-/*   Updated: 2022/05/16 16:29:02 by mmota            ###   ########.fr       */
+/*   Updated: 2022/05/20 21:23:09 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	raycast(t_game *game);
 int		error_exit(char *message);
 int		check_args(int argc, char *argv[]);
 int		check_extension (char *argv);
-void	print_board(t_game *game);
-void	count_identifiers(t_game *game);
+void	print_board(t_game *game, int i);
+int		check_identifiers(t_game *game);
 
 
 #endif

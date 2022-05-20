@@ -53,12 +53,17 @@ void render_background(t_game *game)
 int main(int argc, char *argv[])
 {
 	t_game game;
+	int id_line;
+
+	id_line = 0;
 	if (check_args(argc, argv) != 0)
 		return (1);
 	init_vars(&game);
 	read_map(&game, argv[1]);
-	count_identifiers(&game);
-	print_board(&game);
+	id_line = check_identifiers(&game);
+	if (id_line == 0)
+		error_exit("Error\nIdentifiers are not correct!");
+	print_board(&game, id_line);
 	//init_display(&game);
 	//mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);
 	//render_background(&game);

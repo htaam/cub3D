@@ -2,7 +2,31 @@
 #include "stdio.h"
 #include <string.h>
 
-void count_identifiers(t_game *game)
+/*	-> Function to confirm map is present in the .cub file
+	-> Function to check if map is closed
+	-> Function to check chars used in the map are valid
+
+	-> Function to confirm texture paths
+	-> Function to contirm rgb values
+*/
+
+// Confirm that all id types are found
+int all_idtypes(int *idtypes)
+{
+	int i;
+
+	i = -1;
+	while (++i < 6)
+	{
+		if (idtypes[i] != 1)
+			return (0);
+	}
+	return (1);
+}
+
+// Find and confirms taht all the identifiers types are in the file
+// returns the line bellow which there must be a map
+int	check_identifiers(t_game *game)
 {
 	int idtypes[6];
 	int i;
@@ -25,53 +49,11 @@ void count_identifiers(t_game *game)
 			idtypes[4] += 1;
 		if (ft_strstr(game->board[i], "C ") != 0)
 			idtypes[5] += 1;
+		if (all_idtypes(idtypes))
+			return (++i);	
 		++i;
 	}
-	i = -1;
-	while (++i < 6)
-	{
-		printf("%i", idtypes[i]);
-		if (idtypes[i] != 1)
-		{
-			error_exit("Error\nIdentifiers are not correct!");
-		}
-	}
-	printf("\n");
-}
-
-// Prints board
-void print_board(t_game *game)
-{
-    int i = -1;
-	size_t j;
-	while (game->board[++i])
-	{
-		j = 0;
-		while(j < ft_strlen(game->board[i]))
-		{
-			printf("%c", game->board[i][j]);
-			++j;
-		}
-		printf("\n");
-	}
-}
-
-// Exits the game and frees memory
-int	x_close(t_game *game)
-{
-	int	i;
-
-	i = -1;
-	while (++i < game->board_height)
-		if (game->board && game->board[i])
-			free(game->board[i]);
-	if (game->board)
-		free(game->board);
-	if (game->mlx_win)
-		free(game->mlx_win);
-	if (game->mlx)
-		free(game->mlx);
-	exit(EXIT_SUCCESS);
+	return (0);
 }
 
 // Counts width and height of the board
