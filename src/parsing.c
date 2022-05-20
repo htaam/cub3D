@@ -11,8 +11,17 @@
 void print_board(t_game *game)
 {
     int i = -1;
-	while (++i < game->board_height)
-        printf("%s\n", game->board[i]);
+	size_t j;
+	while (game->board[++i])
+	{
+		j = 0;
+		while(j < ft_strlen(game->board[i]))
+		{
+			printf("%c", game->board[i][j]);
+			++j;
+		}
+		printf("\n");
+	}
 }
 
 // Exits the game and frees memory
@@ -47,7 +56,6 @@ void	count_board_units(t_game *game, char *board)
 	{
 		game->board_width[i] = ft_strlen(line);
 		++game->board_height;
-		printf("%i\n", game->board_width[i]);
 		++i;
 	}
 	free(line);
@@ -71,7 +79,10 @@ void	read_map(t_game *game, char *board)
 	{
         ret = get_next_line(fd, &line);
 		if (ft_strlen(line) > 0)
-			game->board[y++] = line;
+		{
+			game->board[y] = line;
+			y++;
+		}
 		else
 			free(line);
 	}

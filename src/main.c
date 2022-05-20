@@ -52,12 +52,12 @@ void render_background(t_game *game)
 
 int main(int argc, char *argv[])
 {
-	//t_game game;
+	t_game game;
 	if (check_args(argc, argv) != 0)
 		return (1);
-
-	//init_vars(&game);
-	//read_map(&game, argv[1]);
+	init_vars(&game);
+	read_map(&game, argv[1]);
+	print_board(&game);
 	//count_identifiers(&game);
 	//init_display(&game);
 	//mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);

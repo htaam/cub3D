@@ -98,6 +98,7 @@ void	raycast(t_game *game);
 int		error_exit(char *message);
 int		check_args(int argc, char *argv[]);
 int		check_extension (char *argv);
+void	print_board(t_game *game);
 
 
 #endif
