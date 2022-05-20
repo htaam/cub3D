@@ -1,11 +1,43 @@
 #include "cub3d.h"
 #include "stdio.h"
+#include <string.h>
 
-//void count_identifiers(t_game *game)
-//{
-//	int	idtypes[6];
-//
-//}
+void count_identifiers(t_game *game)
+{
+	int idtypes[6];
+	int i;
+
+	i = 0;
+	while (i < 6)
+		idtypes[i++] = 0;
+	i = 0;
+	while (game->board[i])
+	{
+		if (ft_strstr(game->board[i], "NO ") != 0)
+			idtypes[0] += 1;
+		if (ft_strstr(game->board[i], "SO ") != 0)
+			idtypes[1] += 1;
+		if (ft_strstr(game->board[i], "WE ") != 0)
+			idtypes[2] += 1;
+		if (ft_strstr(game->board[i], "EA ") != 0)
+			idtypes[3] += 1;
+		if (ft_strstr(game->board[i], "F ") != 0)
+			idtypes[4] += 1;
+		if (ft_strstr(game->board[i], "C ") != 0)
+			idtypes[5] += 1;
+		++i;
+	}
+	i = -1;
+	while (++i < 6)
+	{
+		printf("%i", idtypes[i]);
+		if (idtypes[i] != 1)
+		{
+			error_exit("Error\nIdentifiers are not correct!");
+		}
+	}
+	printf("\n");
+}
 
 // Prints board
 void print_board(t_game *game)

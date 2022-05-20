@@ -79,7 +79,7 @@ bonus:						all
 clean:						
 							@ $(RM) $(PATH_BUILD)
 							@ make -C $(PATH_LIBFT) clean
-							@ make -C $(PATH_LIBMLX_MAC) clean
+#							@ make -C $(PATH_LIBMLX_MAC) clean
 							@ echo "$(_INFO) Deleted files and directory"
 
 fclean:						clean

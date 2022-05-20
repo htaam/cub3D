@@ -57,8 +57,8 @@ int main(int argc, char *argv[])
 		return (1);
 	init_vars(&game);
 	read_map(&game, argv[1]);
+	count_identifiers(&game);
 	print_board(&game);
-	//count_identifiers(&game);
 	//init_display(&game);
 	//mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);
 	//render_background(&game);
