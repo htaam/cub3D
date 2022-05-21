@@ -2,6 +2,12 @@
 
 
 
+
+
+
+
+
+
 void	init_stuff(t_vars *vars)
 {
 	int x_max = 1080;
@@ -19,13 +25,31 @@ void	init_stuff(t_vars *vars)
 
 int max_height(int wall_distance)
 {
-    return (1080/2 - wall_distance / 2);
+    int lineHeight;
+    int drawStart;
+
+    lineHeight = 1080 / wall_distance;
+    drawStart = -lineHeight / 2 + 1080 / 2;
+    if (drawStart < 0)
+        return (0);
+    return(drawStart); 
 }
 
 int min_height(int wall_distance)
 {
-    return(wall_distance / 2 + 1080/2); 
+
+    int lineHeight;
+    int drawEnd;
+
+    lineHeight = 1080 / wall_distance;
+    drawEnd = lineHeight / 2 + 1080 / 2;
+    if (drawEnd >= 1080)
+        return ( 1080 - 1);
+    return(drawEnd); 
 }
+
+
+
 
 int	main(int argc, char **argv)
 {
@@ -37,36 +61,53 @@ int	main(int argc, char **argv)
     (void)argv;
     (void)argc;
     int x = 0;
-    int y = 0;
+    int y = -1;
     int wall_distances[1080];
+    int wall_sides[1080];
 
     int i = 0;
-    while (i< 1079)
-    {
-        int j = 0;
-
-        while(j++ < 100)
-        {
-            wall_distances[i + j] = i;
-        }
-        i = i + j - 1;
+    int p = 0;
+    while (i < 1080)
+    {  
+        if (i % 100 == 0)
+            p++;
+        wall_distances[i] = p ;
+        wall_sides[i] = 1 ;
+        //printf("%d\t", wall_distances[i]);
+        i++;
     }
 
 
 
-    while (y++ < 1079)
+    while (++y < 1080)
     {
         x = 0;
-        while (x++ < 1079)
+        //printf("y = %d\n" ,y);
+        while (x < 1080)
         {
+          //  printf("x = %d\t" ,x);
             if (y  <= (min_height(wall_distances[x])) && y >= max_height(wall_distances[x]))
             {
                 my_mlx_pixel_put(&vars.image, x,
 					y, (create_trgb(0, (50),
-							255, 0)));
+							100 / wall_sides[x - 1], 0)));
             }
+            else if ( y  > (min_height(wall_distances[x])))
+            {
+                my_mlx_pixel_put(&vars.image, x,
+					y, (create_trgb(0, (50),
+							0, 0)));
+            }
+            else
+            {
+                my_mlx_pixel_put(&vars.image, x,
+					y, (create_trgb(0, (50),
+							0, 200)));
+            }
+            x++;
         }
     }
+
     mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
  
  	mlx_hook(vars.win, 4, 0L, mouse_hook, aux);
