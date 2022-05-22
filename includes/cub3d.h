@@ -33,6 +33,15 @@ typedef struct s_data
 	int		endian;
 }				t_data;
 
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}				t_player;
 
 typedef struct s_vars
 {
