@@ -63,7 +63,8 @@ int main(int argc, char *argv[])
 	id_line = check_identifiers(&game);
 	if (id_line == 0)
 		error_exit("Error\nIdentifiers are not correct!");
-	print_board(&game, id_line);
+	map_isclosed(&game, id_line);
+	//print_board(&game, id_line);
 	//init_display(&game);
 	//mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);
 	//render_background(&game);

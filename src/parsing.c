@@ -10,6 +10,81 @@
 	-> Function to contirm rgb values
 */
 
+/* 
+-> The reason to use ft_strlen(game->board[i]) instead of
+game->board_width[i] is because it gives an error
+when the first 2 lines are not correctly printed.
+Problem Unknown since the print_board() function
+works correctly...
+
+-> Map_isclosed() is validating correctly if the map is indented with spaces
+but does not validate correctly if the map is indented with tabs instead
+*/
+
+/*	The map_isclosed() function iterate through the map and checks if the limits are all 1s
+	The hst and wst variables are used as flags to confirm when we are iterating in the first line or first column
+	since they can start anywhere
+
+	the printfs are just for visualization purposes and will be removed after
+
+	if there is an empty line at the end or middle of the map..
+	gives a sagmentation fault
+*/
+void map_isclosed(t_game *game, int i)
+{
+	int hst;
+	int wst;
+	size_t j;
+
+	hst = 0;
+	wst = 0;
+	while (i < game->board_height - 1)
+	{
+		j = 0;
+		while (j < ft_strlen(game->board[i]))
+		{
+			while (!ft_isalnum(game->board[i][j]))
+			{
+				printf("%c", game->board[i][j]);
+				++j;
+			}
+			// check first and last column
+			if (!hst || i == game->board_height - 2)
+			{
+				if (game->board[i][j] != '1')
+					error_exit("Board is not closed1");
+			}
+			// check first line
+			if (!wst || j == ft_strlen(game->board[i]) - 1)
+			{
+				if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
+					error_exit("Board is not closed2");
+			}
+			if (!ft_isalnum(game->board[i - 1][j]) || !ft_isalnum(game->board[i][j + 1]) || !ft_isalnum(game->board[i][j - 1]))
+			{
+				if (game->board[i][j] != '1')
+					error_exit("Board is not closed3");
+			}
+			// check in-between indentations
+			if (i != game->board_height - 2)
+			{
+				if (!ft_isalnum(game->board[i + 1][j]))
+				{
+					if (game->board[i][j] != '1')
+						error_exit("Board is not closed3");
+				}
+			}
+			printf("%c", game->board[i][j]);
+			wst = 1;
+			++j;
+		}
+		printf("\n");
+		hst = 1;
+		++i;
+	}
+	printf("map is valid");
+}
+
 // Confirm that all id types are found
 int all_idtypes(int *idtypes)
 {
@@ -69,7 +144,7 @@ void	count_board_units(t_game *game, char *board)
 	while (get_next_line(fd, &line))
 	{
 		game->board_width[i] = ft_strlen(line);
-		++game->board_height;
+		game->board_height++;
 		++i;
 	}
 	free(line);

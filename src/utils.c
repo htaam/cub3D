@@ -5,7 +5,7 @@
 void print_board(t_game *game, int i)
 {
 	size_t j;
-	while (game->board[++i])
+	while (game->board[i])
 	{
 		j = 0;
 		while(j < ft_strlen(game->board[i]))
@@ -13,6 +13,7 @@ void print_board(t_game *game, int i)
 			printf("%c", game->board[i][j]);
 			++j;
 		}
+		++i;
 		printf("\n");
 	}
 }
