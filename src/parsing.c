@@ -30,6 +30,18 @@ but does not validate correctly if the map is indented with tabs instead
 	if there is an empty line at the end or middle of the map..
 	gives a sagmentation fault
 */
+
+int empty_line(t_game *game, int i)
+{
+	if (game->board_width[i] <= 0)
+	{
+		printf("%i\n", game->board_width[i]);
+		return (0);
+	}
+	return (1);
+}
+
+
 void map_isclosed(t_game *game, int i)
 {
 	int hst;
@@ -38,46 +50,48 @@ void map_isclosed(t_game *game, int i)
 
 	hst = 0;
 	wst = 0;
-	while (i < game->board_height - 1)
+	printf("%i %s\n", i, game->board[i]);
+	while (empty_line(game, i))
+		++i;
+	
+	while (i < game->board_height)
 	{
+		if (empty_line(game, i))
+			error_exit("Board has empty lines!");
 		j = 0;
 		while (j < ft_strlen(game->board[i]))
 		{
-			while (!ft_isalnum(game->board[i][j]))
+			if (!hst || i == game->board_height)
 			{
-				printf("%c", game->board[i][j]);
-				++j;
-			}
-			// check first and last column
-			if (!hst || i == game->board_height - 2)
-			{
-				if (game->board[i][j] != '1')
+				if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 					error_exit("Board is not closed1");
 			}
 			// check first line
-			if (!wst || j == ft_strlen(game->board[i]) - 1)
+			else if (!wst || j == ft_strlen(game->board[i]))
 			{
 				if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 					error_exit("Board is not closed2");
 			}
-			if (!ft_isalnum(game->board[i - 1][j]) || !ft_isalnum(game->board[i][j + 1]) || !ft_isalnum(game->board[i][j - 1]))
+			else if (!ft_isalnum(game->board[i - 1][j]) || !ft_isalnum(game->board[i][j + 1]) || !ft_isalnum(game->board[i][j - 1]))
 			{
-				if (game->board[i][j] != '1')
+				if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 					error_exit("Board is not closed3");
 			}
 			// check in-between indentations
-			if (i != game->board_height - 2)
+			if (i == game->board_height)
 			{
-				if (!ft_isalnum(game->board[i + 1][j]))
+				if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 				{
 					if (game->board[i][j] != '1')
-						error_exit("Board is not closed3");
+						error_exit("Board is not closed4");
 				}
 			}
 			printf("%c", game->board[i][j]);
 			wst = 1;
 			++j;
 		}
+		if (j < 4)
+			error_exit("Map has not enough passage!");
 		printf("\n");
 		hst = 1;
 		++i;
@@ -99,7 +113,7 @@ int all_idtypes(int *idtypes)
 	return (1);
 }
 
-// Find and confirms taht all the identifiers types are in the file
+// Find and confirms that all the identifiers types are in the file
 // returns the line bellow which there must be a map
 int	check_identifiers(t_game *game)
 {
