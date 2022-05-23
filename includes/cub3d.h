@@ -24,6 +24,8 @@
 #  define DIGITS_AND_STUFF "-.0123456789"
 # endif
 
+
+
 typedef struct s_data
 {
 	void	*img;
@@ -48,6 +50,7 @@ typedef struct s_vars
 	void		*mlx;
 	void		*win;
 	t_data		image;
+	t_player	player;
 }				t_vars;
 
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -55,5 +58,8 @@ int				create_trgb(int t, int r, int g, int b);
 int				red_cross(void);
 int				mouse_hook(int mouse_code, int x, int y, t_vars *vars);
 int				key_hook(int keycode, t_vars *vars);
+void			rotate_player(t_vars *vars, int keycode);
+void			draw_stuff(t_vars vars);
+void			forward(t_vars *vars);
 
 #endif

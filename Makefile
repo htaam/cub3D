@@ -7,6 +7,7 @@ CFLAGS = -Wall -Wextra -Werror -O3
 MLX =  -lmlx -lm -framework OpenGL -framework AppKit
 
 SRC = main.c \
+		movement.c\
 		hook.c \
 		aux1.c
 		

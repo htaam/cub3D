@@ -77,31 +77,27 @@ int min_height(double wall_distance)
     return(drawEnd); 
 }
 
-int	main(int argc, char **argv)
-{
-	t_vars		vars;
-    void		*aux;
 
-	aux = &vars;
-	init_stuff(&vars);
-	(void)argv;
-	(void)argc;
-	t_player player;
-	player.pos_x = 15;
-	player.pos_y = 20;
-	player.dir_x = -1;
-	player.dir_y = -1;
-	player.plane_x = 0;
-	player.plane_y = 0.66;
+void	draw_stuff(t_vars vars)
+{
 	double screen_x = 1;
+	t_data image;
+
+	mlx_clear_window(vars.mlx, vars.win);
+	image.img = mlx_new_image(vars.mlx, ScreenWith,
+			ScreenHeight);
+	image.addr = mlx_get_data_addr(image.img,
+			&image.bits_per_pixel,
+			&image.line_length, &image.endian);
+
 	while (screen_x < ScreenWith)
 	{
 		double	camera_x = 2 * screen_x/ScreenWith;
-		double	ray_dir_x = player.dir_x + player.plane_x * camera_x;
-		double	ray_dir_y = player.dir_y + player.plane_y * camera_x;
+		double	ray_dir_x = vars.player.dir_x + vars.player.plane_x * camera_x;
+		double	ray_dir_y = vars.player.dir_y + vars.player.plane_y * camera_x;
 
-		int mapx = (int)(player.pos_x);
-		int mapy = (int)(player.pos_y);
+		int mapx = (int)(vars.player.pos_x);
+		int mapy = (int)(vars.player.pos_y);
 
 		double sideDistx;
 		double sideDisty;
@@ -124,22 +120,22 @@ int	main(int argc, char **argv)
 		if(ray_dir_x < 0)
 		{
 			stepx = -1;
-			sideDistx = (player.pos_x - mapx) * deltaDistx;
+			sideDistx = (vars.player.pos_x - mapx) * deltaDistx;
 		}
 		else
 		{
 			stepx = 1;
-			sideDistx = (mapx + 1 - player.pos_x) * deltaDistx;
+			sideDistx = (mapx + 1 - vars.player.pos_x) * deltaDistx;
 		}
 		if (ray_dir_y < 0)
 		{
 			stepy = -1;
-			sideDisty = (player.pos_y - mapy) * deltaDisty;
+			sideDisty = (vars.player.pos_y - mapy) * deltaDisty;
 		}
 		else
 		{
 			stepx = 1;
-			sideDisty = (mapy + 1 - player.pos_y) * deltaDisty;
+			sideDisty = (mapy + 1 - vars.player.pos_y) * deltaDisty;
 		}
 		while (hit == 0)
 		{
@@ -171,27 +167,48 @@ int	main(int argc, char **argv)
 		{
 			if (screen_y <= (min_height(perpWallDist)) && screen_y >= max_height(perpWallDist))
 			{
-				my_mlx_pixel_put(&vars.image, screen_x,
-					screen_y, (create_trgb(50*side, 0,
-							100, 0)));
+				my_mlx_pixel_put(&image, screen_x,
+					screen_y, (create_trgb(100*side, 0,
+							100, 200*side)));
 			}
 			else if ( screen_y  > (min_height(perpWallDist)))
 			{
-				my_mlx_pixel_put(&vars.image, screen_x,
-					screen_y, (create_trgb(0, 100,
-							0, 0)));
+				my_mlx_pixel_put(&image, screen_x,
+					screen_y, (create_trgb(0, 50,
+							50, 50)));
 			}
 			else
 			{
-				my_mlx_pixel_put(&vars.image, screen_x,
-					screen_y, (create_trgb(0, 0,
-							0, 100)));
+				my_mlx_pixel_put(&image, screen_x,
+					screen_y, (create_trgb(0, 200,
+							100, 0)));
 			}
 			screen_y++;
 		}
 		screen_x++;
 	}
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
+	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
+	mlx_destroy_image(vars.mlx, image.img);
+}
+
+
+int	main(int argc, char **argv)
+{
+	t_vars		vars;
+    void		*aux;
+
+	aux = &vars;
+	init_stuff(&vars);
+	(void)argv;
+	(void)argc;
+	vars.player.pos_x = 2.5;
+	vars.player.pos_y = 2.5;
+	vars.player.dir_x = 0;
+	vars.player.dir_y = 1;
+	vars.player.plane_x = -.66;
+	vars.player.plane_y = 0;
+	draw_stuff(vars);
+	
  
  	mlx_hook(vars.win, 4, 0L, mouse_hook, aux);
 	mlx_hook(vars.win, 17, 0L, red_cross, aux);
@@ -200,75 +217,3 @@ int	main(int argc, char **argv)
  
     mlx_loop(vars.mlx);		
 }
-
-
-
-
-/*int	main(int argc, char **argv)
-{
-	t_vars		vars;
-    void		*aux;
-
-	aux = &vars;
-	init_stuff(&vars);
-    (void)argv;
-    (void)argc;
-    int x = 0;
-    int y = -1;
-    int wall_distances[1080];
-    int wall_sides[1080];
-
-    int i = 0;
-    int p = 0;
-    while (i < 1080)
-    {  
-        if (i % 100 == 0)
-            p++;
-        wall_distances[i] = p ;
-        wall_sides[i] = 1 ;
-        //printf("%d\t", wall_distances[i]);
-        i++;
-    }
-
-
-
-    while (++y < 1080)
-    {
-        x = 0;
-        //printf("y = %d\n" ,y);
-        while (x < 1080)
-        {
-          //  printf("x = %d\t" ,x);
-            if (y  <= (min_height(wall_distances[x])) && y >= max_height(wall_distances[x]))
-            {
-                my_mlx_pixel_put(&vars.image, x,
-					y, (create_trgb(0, (50),
-							100 / wall_sides[x - 1], 0)));
-            }
-            else if ( y  > (min_height(wall_distances[x])))
-            {
-                my_mlx_pixel_put(&vars.image, x,
-					y, (create_trgb(0, (50),
-							0, 0)));
-            }
-            else
-            {
-                my_mlx_pixel_put(&vars.image, x,
-					y, (create_trgb(0, (50),
-							0, 200)));
-            }
-            x++;
-        }
-    }
-
-    mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
- 
- 	mlx_hook(vars.win, 4, 0L, mouse_hook, aux);
-	mlx_hook(vars.win, 17, 0L, red_cross, aux);
-	mlx_hook(vars.win, 2, 0L, key_hook, aux);
-	mlx_loop(vars.mlx);
- 
-    mlx_loop(vars.mlx);
-}*/
-
-

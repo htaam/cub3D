@@ -17,13 +17,14 @@ int	key_hook(int keycode, t_vars *vars)
 	(void)vars;
 	if (keycode == 53)
 		exit (0);
-	if (keycode == 69 || keycode == 4)
-		;
-	if (keycode == 78)
-		;
+	if (keycode == 123 || keycode == 124)
+		rotate_player(vars, keycode);
+	if (keycode == 13)
+		forward(vars);
 	return (keycode);
 }
 
+/* w = 13	a = 0	d = 2	s = 1	<- =  123	-> = 124*/
 int	mouse_hook(int mouse_code, int x, int y, t_vars *vars)
 {
 	(void)vars;
