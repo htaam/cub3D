@@ -5,7 +5,7 @@
 void print_board(t_game *game, int i)
 {
 	size_t j;
-	while (game->board[i])
+	while (i < game->board_height)
 	{
 		j = 0;
 		while(j < ft_strlen(game->board[i]))

@@ -83,13 +83,15 @@ void	count_board_units(t_game *game, char *board)
 	int		fd;
 	char	*line;
 	int i = 0;
+	int ret = 1;
 
 	fd = open(board, O_RDONLY);
 	if (!fd)
 		x_close(game);
-	while (get_next_line(fd, &line))
+	while (ret > 0)
 	{
-		game->board_width[i] = ft_strlen(line);
+		ret = get_next_line(fd, &line);
+		//game->board_width[i] = ft_strlen(line);
 		game->board_height++;
 		++i;
 	}
@@ -116,6 +118,9 @@ void	read_map(t_game *game, char *board)
 		game->board[y] = line;
 		y++;
 	}
+	ret = get_next_line(fd, &line);
+	if (ret != 0)
+		game->board[y] = line;
 	free(line);
 	close(fd);
 }

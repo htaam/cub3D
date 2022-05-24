@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/24 19:08:52 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/24 22:54:05 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ void	map_isclosed(t_game *game, int i)
 		j = 0;
 		while (j < ft_strlen(game->board[i]))
 		{
-			if (!hst || i == game->board_height - 1)
+			if (!hst || i == game->board_height)
 				if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 					error_exit("Board is not closed1");
+
+					
 			if (!wst || j == ft_strlen(game->board[i]))
 				if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 					error_exit("Board is not closed2");
@@ -64,11 +66,11 @@ void	map_isclosed(t_game *game, int i)
 		printf("\n");
 		hst = 1;
 		++i;
-		while (empty_line(game, i) && ++i < game->board_height)
-		{
-			if (!empty_line(game, i))
-				error_exit("Map has no passage!");
-		}
+		//while (empty_line(game, i) && ++i <= game->board_height - 1)
+		//{
+		//	if (!empty_line(game, i))
+		//		error_exit("Map has no passage!");
+		//}
 	}
 	printf("map is valid");
 }
