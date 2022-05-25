@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/25 13:20:22 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/25 13:49:51 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	empty_line(t_game *game, int i)
 		return (1);
 	while (++j < ft_strlen(game->board[i]))
 	{
-		if (ft_isprint(game->board[i][j]))
+		if (ft_isalnum(game->board[i][j]))
 			return (0);
 	}
 	return (1);
@@ -57,11 +57,12 @@ void	map_isclosed(t_game *game, int i)
 		}
 		printf("\n");
 		++i;
-		//while (empty_line(game, i) && ++i <= game->board_height - 1)
-		//{
-		//	if (!empty_line(game, i))
-		//		error_exit("Map has no passage!");
-		//}
+		while (i + 1 < game->board_height && empty_line(game, i))
+		{
+			++i;
+			if (!empty_line(game, i))
+				error_exit("Map has no passage!");
+		}
 	}
 	printf("map is valid");
 }
