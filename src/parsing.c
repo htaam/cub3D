@@ -91,7 +91,8 @@ void	count_board_units(t_game *game, char *board)
 	while (ret > 0)
 	{
 		ret = get_next_line(fd, &line);
-		//game->board_width[i] = ft_strlen(line);
+		if (ft_strlen(line) > game->board_width)
+		game->board_width = ft_strlen(line);
 		game->board_height++;
 		++i;
 	}

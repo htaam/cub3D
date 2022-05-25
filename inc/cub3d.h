@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 12:29:40 by mmota             #+#    #+#             */
-/*   Updated: 2022/05/22 13:10:08 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/25 19:12:49 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_game
 	void		*mlx_win;
 	char		**board;
 	int			board_height;
-	int			board_width[1000];
+	size_t		board_width;
 }				t_game;
 
 //	so_long
