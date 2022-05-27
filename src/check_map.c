@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/27 22:14:09 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/27 22:31:24 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,34 @@ int	empty_line(t_game *game, int i)
 	return (1);
 }
 
+void	check_map_characters(t_game *game, int i)
+{
+	size_t j;
+	int flag = 0;
+	while (i < game->board_height)
+	{
+		j = 0;
+		while (j < ft_strlen(game->board[i]))
+		{
+			if (ft_isalnum(game->board[i][j]))
+			{
+				if (game->board[i][j] != '1' && game->board[i][j] != '0' 
+				&& game->board[i][j] != 'N' && game->board[i][j] != 'S'
+				&& game->board[i][j] != 'E' && game->board[i][j] != 'W')
+				{
+					error_exit("Map has invalid character!");
+				}
+				if (game->board[i][j] != '1' && game->board[i][j] != '0')
+					flag++;
+				if (flag == 2)
+					error_exit("Map has more than one direction!");
+			}
+			++j;
+		}
+		++i;
+	}
+}
+
 void	map_isclosed(t_game *game, int i)
 {
 	size_t	j;
@@ -66,6 +94,7 @@ void	map_isclosed(t_game *game, int i)
 	while (empty_line(game, i))
 		++i;
 	vertical_empty_line(game, i);
+	check_map_characters(game, i);
 	while (i < game->board_height)
 	{
 		j = 0;
@@ -82,10 +111,10 @@ void	map_isclosed(t_game *game, int i)
 				if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 					error_exit("Board is not closed2");
 			}
-			//printf("%c", game->board[i][j]);
+			printf("%c", game->board[i][j]);
 			++j;
 		}
-		//printf("\n");
+		printf("\n");
 		++i;
 		while (i + 1 < game->board_height && empty_line(game, i))
 		{
