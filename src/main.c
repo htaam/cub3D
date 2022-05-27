@@ -1,59 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/27 22:56:59 by marmota           #+#    #+#             */
+/*   Updated: 2022/05/27 23:01:54 by marmota          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include "stdio.h"
 #include "stdlib.h"
 
-int error_exit(char *message)
+int	error_exit(char *message)
 {
 	printf("%s\n", message);
 	exit(EXIT_FAILURE);
 }
 
-// Display color
-int create_trgb(int t, int r, int g, int b)
+int	main(int argc, char *argv[])
 {
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-void drawPlayer(t_game *game)
-{
-	game->player.width = 8;
-	game->player.height = 8;
-	int color = create_trgb(0, 255, 204, 0);
-	int i = game->player.posY;
-	int j;
-	if (game->mlx_win == NULL)
-		return ;
-	while (i < game->player.width + game->player.posY)
-	{
-		j = game->player.posX;
-		while (j < game->player.height + game->player.posX)
-			mlx_pixel_put(game->mlx, game->mlx_win, j++, i, color);
-		++i;
-	}
-}
-
-void render_background(t_game *game)
-{
-	int color = create_trgb(30, 30, 30, 30);
-	int i = 0;
-	int j;
-	if (game->mlx_win == NULL)
-		return ;
-	while (i < 512)
-	{
-		j = 0;
-		while (j < 1024)
-		{
-			mlx_pixel_put(game->mlx, game->mlx_win, j++, i, color);	
-		}
-		++i;
-	}
-}
-
-int main(int argc, char *argv[])
-{
-	t_game game;
-	int id_line;
+	t_game	game;
+	int		id_line;
 
 	id_line = 0;
 	if (check_args(argc, argv) != 0)

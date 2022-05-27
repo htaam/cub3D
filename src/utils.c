@@ -1,14 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/27 22:34:58 by marmota           #+#    #+#             */
+/*   Updated: 2022/05/27 22:35:47 by marmota          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include <stdio.h>
 
 // Prints board
-void print_board(t_game *game, int i)
+void	print_board(t_game *game, int i)
 {
-	size_t j;
+	size_t	j;
+
 	while (i < game->board_height)
 	{
 		j = 0;
-		while(j < ft_strlen(game->board[i]))
+		while (j < ft_strlen(game->board[i]))
 		{
 			printf("%c", game->board[i][j]);
 			++j;

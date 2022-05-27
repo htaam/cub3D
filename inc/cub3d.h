@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 12:29:40 by mmota             #+#    #+#             */
-/*   Updated: 2022/05/25 19:12:49 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/27 22:58:03 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	counter_moves(t_game *game);
 
 
 //Cub3d
-void	drawPlayer(t_game *game);
+void	drawplayer(t_game *game);
 void	render_background(t_game *game);
 void	init_display(t_game *game);
 void	raycast(t_game *game);

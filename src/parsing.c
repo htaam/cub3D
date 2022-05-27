@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/27 22:53:17 by marmota           #+#    #+#             */
+/*   Updated: 2022/05/27 23:04:55 by marmota          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include "stdio.h"
 #include <string.h>
@@ -21,8 +33,10 @@ works correctly...
 but does not validate correctly if the map is indented with tabs instead
 */
 
-/*	The map_isclosed() function iterate through the map and checks if the limits are all 1s
-	The hst and wst variables are used as flags to confirm when we are iterating in the first line or first column
+/*	The map_isclosed() function iterate through the map and checks 
+	if the limits are all 1s
+	The hst and wst variables are used as flags to confirm when 
+	we are iterating in the first line or first column
 	since they can start anywhere
 
 	the printfs are just for visualization purposes and will be removed after
@@ -32,9 +46,9 @@ but does not validate correctly if the map is indented with tabs instead
 */
 
 // Confirm that all id types are found
-int all_idtypes(int *idtypes)
+int	all_idtypes(int *idtypes)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 6)
@@ -49,14 +63,14 @@ int all_idtypes(int *idtypes)
 // returns the line bellow which there must be a map
 int	check_identifiers(t_game *game)
 {
-	int idtypes[6];
-	int i;
+	int	idtypes[6];
+	int	i;
 
 	i = 0;
 	while (i < 6)
 		idtypes[i++] = 0;
-	i = 0;
-	while (game->board[i])
+	i = -1;
+	while (game->board[++i])
 	{
 		if (ft_strstr(game->board[i], "NO ") != 0)
 			idtypes[0] += 1;
@@ -71,8 +85,7 @@ int	check_identifiers(t_game *game)
 		if (ft_strstr(game->board[i], "C ") != 0)
 			idtypes[5] += 1;
 		if (all_idtypes(idtypes))
-			return (++i);	
-		++i;
+			return (++i);
 	}
 	return (0);
 }
@@ -82,9 +95,11 @@ void	count_board_units(t_game *game, char *board)
 {
 	int		fd;
 	char	*line;
-	int i = 0;
-	int ret = 1;
+	int		i;
+	int		ret;
 
+	i = 0;
+	ret = 1;
 	fd = open(board, O_RDONLY);
 	if (!fd)
 		x_close(game);
@@ -115,7 +130,7 @@ void	read_map(t_game *game, char *board)
 	game->board = ft_calloc(game->board_height, sizeof(char *));
 	while (ret > 0)
 	{
-        ret = get_next_line(fd, &line);
+		ret = get_next_line(fd, &line);
 		game->board[y] = line;
 		y++;
 	}
