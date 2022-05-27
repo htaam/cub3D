@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/27 22:31:24 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/27 23:06:31 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 
 int	vertical_empty_line(t_game *game, int i)
 {
-	size_t j = 0;
-	int space;
-	int start = i;
+	size_t	j;
+	int		space;
+	int		start;
+
+	j = 0;
+	start = i;
 	while (j < ft_strlen(game->board[i]))
 	{
 		space = 0;
@@ -28,15 +31,13 @@ int	vertical_empty_line(t_game *game, int i)
 			{
 				i = start;
 				space = 0;
-				j++;
-				if (j >= ft_strlen(game->board[i]))
-					break;
+				if (++j >= ft_strlen(game->board[i]))
+					break ;
 			}
 			else
 			{
-				++space;
 				++i;
-				if (space == game->board_height - start - 2)
+				if (++space == game->board_height - start - 2)
 					error_exit("Board has a vertical empty line");
 			}
 		}
