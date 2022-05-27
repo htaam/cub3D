@@ -21,6 +21,8 @@ int	key_hook(int keycode, t_vars *vars)
 		rotate_player(vars, keycode);
 	if (keycode == 13)
 		forward(vars);
+	if (keycode == 1)
+		backward(vars);
 	return (keycode);
 }
 

@@ -61,5 +61,6 @@ int				key_hook(int keycode, t_vars *vars);
 void			rotate_player(t_vars *vars, int keycode);
 void			draw_stuff(t_vars vars);
 void			forward(t_vars *vars);
+void			backward(t_vars *vars);
 
 #endif

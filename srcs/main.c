@@ -32,6 +32,34 @@ int worldMap[mapWidth][mapHeight]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
+/*int worldMap[mapWidth][mapHeight]=
+{
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+	{1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,1},
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+};*/
+
 
 
 
@@ -80,7 +108,7 @@ int min_height(double wall_distance)
 
 void	draw_stuff(t_vars vars)
 {
-	double screen_x = 1;
+	double screen_x = 0;
 	t_data image;
 
 	mlx_clear_window(vars.mlx, vars.win);
@@ -90,11 +118,11 @@ void	draw_stuff(t_vars vars)
 			&image.bits_per_pixel,
 			&image.line_length, &image.endian);
 
-	while (screen_x < ScreenWith)
+	while (++screen_x < ScreenWith)
 	{
-		double	camera_x = 2 * screen_x/ScreenWith;
-		double	ray_dir_x = vars.player.dir_x + vars.player.plane_x * camera_x;
-		double	ray_dir_y = vars.player.dir_y + vars.player.plane_y * camera_x;
+		double	camera_x = 2 * (screen_x / ScreenWith) - 1;
+		double	ray_dir_x = vars.player.dir_x + (vars.player.plane_x * camera_x);
+		double	ray_dir_y = vars.player.dir_y + (vars.player.plane_y * camera_x);
 
 		int mapx = (int)(vars.player.pos_x);
 		int mapy = (int)(vars.player.pos_y);
@@ -103,14 +131,17 @@ void	draw_stuff(t_vars vars)
 		double sideDisty;
 		double deltaDistx;
 		double deltaDisty;
+
 		if (ray_dir_x == 0)
 			deltaDistx = 1e10;
 		else
 			deltaDistx = fabs(1 / ray_dir_x);
+
 		if (ray_dir_y == 0)
 			deltaDisty = 1e10;
 		else
 			deltaDisty = fabs(1 / ray_dir_y);
+
 		int stepx;
 		int stepy;
 
@@ -134,7 +165,7 @@ void	draw_stuff(t_vars vars)
 		}
 		else
 		{
-			stepx = 1;
+			stepy = 1;
 			sideDisty = (mapy + 1 - vars.player.pos_y) * deltaDisty;
 		}
 		while (hit == 0)
@@ -162,14 +193,14 @@ void	draw_stuff(t_vars vars)
 		else
 			perpWallDist = (sideDisty - deltaDisty);
 		
-		int screen_y = 1;
-		while (screen_y < ScreenHeight)
+		int screen_y = 0;
+		while (++screen_y < ScreenHeight)
 		{
 			if (screen_y <= (min_height(perpWallDist)) && screen_y >= max_height(perpWallDist))
 			{
 				my_mlx_pixel_put(&image, screen_x,
-					screen_y, (create_trgb(100*side, 0,
-							100, 200*side)));
+					screen_y, (create_trgb(100*side, worldMap[mapx][mapy]*50,
+							100, 0)));
 			}
 			else if ( screen_y  > (min_height(perpWallDist)))
 			{
@@ -181,11 +212,10 @@ void	draw_stuff(t_vars vars)
 			{
 				my_mlx_pixel_put(&image, screen_x,
 					screen_y, (create_trgb(0, 200,
-							100, 0)));
+							100, 100)));
 			}
-			screen_y++;
 		}
-		screen_x++;
+		
 	}
 	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
 	mlx_destroy_image(vars.mlx, image.img);
@@ -201,12 +231,12 @@ int	main(int argc, char **argv)
 	init_stuff(&vars);
 	(void)argv;
 	(void)argc;
-	vars.player.pos_x = 2.5;
-	vars.player.pos_y = 2.5;
-	vars.player.dir_x = 0;
-	vars.player.dir_y = 1;
-	vars.player.plane_x = -.66;
-	vars.player.plane_y = 0;
+	vars.player.pos_x = 20;
+	vars.player.pos_y = 20;
+	vars.player.dir_x = -1;
+	vars.player.dir_y = 0;
+	vars.player.plane_x = 0;
+	vars.player.plane_y = 0.5;
 	draw_stuff(vars);
 	
  

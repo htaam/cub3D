@@ -1,8 +1,9 @@
 #include "cub3d.h"
 #define mapWidth 24
-#define mapHeight 24
+#define mapHeight 24	
 #define ScreenWith 1080
 #define ScreenHeight 1080
+double speed = 0.5;
 int worldMap2[mapWidth][mapHeight]=
 {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -31,13 +32,41 @@ int worldMap2[mapWidth][mapHeight]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
+/*int worldMap2[mapWidth][mapHeight]=
+{
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+	{1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,1},
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+};*/
+
 
 void	rotate_player(t_vars *vars, int keycode)
 {
 	double olddirx;
 	double oldplanex;
 
-	if (keycode == 123)
+	if (keycode == 124)
 	{
 		olddirx = vars->player.dir_x;
 		vars->player.dir_x = vars->player.dir_x * cos(-.1) -  vars->player.dir_y * sin(-.1);
@@ -46,7 +75,7 @@ void	rotate_player(t_vars *vars, int keycode)
 		vars->player.plane_x = vars->player.plane_x * cos(-.1) -  vars->player.plane_y * sin(-.1);
 		vars->player.plane_y = oldplanex * sin(-.1) + vars->player.plane_y * cos(-.1);
 	}
-	else if (keycode == 124)
+	else if (keycode == 123)
 	{
 		olddirx = vars->player.dir_x;
 		vars->player.dir_x = vars->player.dir_x * cos(.1) -  vars->player.dir_y * sin(.1);
@@ -60,11 +89,28 @@ void	rotate_player(t_vars *vars, int keycode)
 
 void	forward(t_vars *vars)
 {
-	if (worldMap2[(int)(vars->player.pos_x + vars->player.dir_x * .1)][(int)vars->player.pos_y] == 0)
-		vars->player.pos_x = vars->player.pos_x + vars->player.dir_x * .1;
-	if (worldMap2[(int)vars->player.pos_x][(int)(vars->player.dir_y + vars->player.dir_y * .1)] == 0)
-		vars->player.pos_y = vars->player.pos_y + vars->player.dir_y * .1;
+	if (worldMap2[(int)(vars->player.pos_x + vars->player.dir_x * speed)][(int)vars->player.pos_y] == 0)
+	{
+		vars->player.pos_x = vars->player.pos_x + vars->player.dir_x * speed;
+	}
+	if (worldMap2[(int)vars->player.pos_x][(int)(vars->player.pos_y + vars->player.dir_y * speed)] == 0)
+	{
+		vars->player.pos_y = vars->player.pos_y + vars->player.dir_y * speed;
+	}
 	draw_stuff(*vars);
+}
+
+void	backward(t_vars *vars)
+{
+		if (worldMap2[(int)(vars->player.pos_x - vars->player.dir_x * speed)][(int)vars->player.pos_y] == 0)
+	{
+		vars->player.pos_x = vars->player.pos_x - vars->player.dir_x * speed;
+	}
+	if (worldMap2[(int)vars->player.pos_x][(int)(vars->player.pos_y - vars->player.dir_y * speed)] == 0)
+	{
+		vars->player.pos_y = vars->player.pos_y - vars->player.dir_y * speed;
+	}
+	draw_stuff(*vars);	
 }
 
 
