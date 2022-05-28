@@ -12,7 +12,7 @@ int worldMap2[mapWidth][mapHeight]=
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
   {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+  {1,0,0,0,0,0,2,0,6,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
   {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -89,11 +89,11 @@ void	rotate_player(t_vars *vars, int keycode)
 
 void	forward(t_vars *vars)
 {
-	if (worldMap2[(int)(vars->player.pos_x + vars->player.dir_x * speed)][(int)vars->player.pos_y] == 0)
+	if (worldMap2[(int)(vars->player.pos_x + vars->player.dir_x * speed * 2)][(int)vars->player.pos_y] == 0)
 	{
 		vars->player.pos_x = vars->player.pos_x + vars->player.dir_x * speed;
 	}
-	if (worldMap2[(int)vars->player.pos_x][(int)(vars->player.pos_y + vars->player.dir_y * speed)] == 0)
+	if (worldMap2[(int)vars->player.pos_x][(int)(vars->player.pos_y + vars->player.dir_y * speed * 2)] == 0)
 	{
 		vars->player.pos_y = vars->player.pos_y + vars->player.dir_y * speed;
 	}
@@ -102,15 +102,54 @@ void	forward(t_vars *vars)
 
 void	backward(t_vars *vars)
 {
-		if (worldMap2[(int)(vars->player.pos_x - vars->player.dir_x * speed)][(int)vars->player.pos_y] == 0)
+	if (worldMap2[(int)(vars->player.pos_x - vars->player.dir_x * speed * 2)][(int)vars->player.pos_y] == 0)
 	{
 		vars->player.pos_x = vars->player.pos_x - vars->player.dir_x * speed;
 	}
-	if (worldMap2[(int)vars->player.pos_x][(int)(vars->player.pos_y - vars->player.dir_y * speed)] == 0)
+	if (worldMap2[(int)vars->player.pos_x][(int)(vars->player.pos_y - vars->player.dir_y * speed * 2)] == 0)
 	{
 		vars->player.pos_y = vars->player.pos_y - vars->player.dir_y * speed;
 	}
-	draw_stuff(*vars);	
+	draw_stuff(*vars);
+}
+
+void	right(t_vars *vars)
+{
+	double turnx;
+	double turny;
+
+	turnx = vars->player.dir_x * cos(PI/2) -  vars->player.dir_y * sin(PI/2);
+	turny = vars->player.dir_x * sin(PI/2) + vars->player.dir_y * cos(PI/2);
+
+	if (worldMap2[(int)(vars->player.pos_x - turnx * speed * 2)][(int)vars->player.pos_y] == 0)
+	{
+		vars->player.pos_x = vars->player.pos_x - turnx * speed;
+	}
+	if (worldMap2[(int)vars->player.pos_x][(int)(vars->player.pos_y - turny * speed * 2)] == 0)
+	{
+		vars->player.pos_y = vars->player.pos_y - turny * speed;
+	}
+	draw_stuff(*vars);
+}
+
+
+void	left(t_vars *vars)
+{
+	double turnx;
+	double turny;
+
+	turnx = vars->player.dir_x * cos(-PI/2) -  vars->player.dir_y * sin(-PI/2);
+	turny = vars->player.dir_x * sin(-PI/2) + vars->player.dir_y * cos(-PI/2);
+
+	if (worldMap2[(int)(vars->player.pos_x - turnx * speed * 2)][(int)vars->player.pos_y] == 0)
+	{
+		vars->player.pos_x = vars->player.pos_x - turnx * speed;
+	}
+	if (worldMap2[(int)vars->player.pos_x][(int)(vars->player.pos_y - turny * speed * 2)] == 0)
+	{
+		vars->player.pos_y = vars->player.pos_y - turny * speed;
+	}
+	draw_stuff(*vars);
 }
 
 

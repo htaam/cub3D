@@ -14,7 +14,6 @@
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	(void)vars;
 	if (keycode == 53)
 		exit (0);
 	if (keycode == 123 || keycode == 124)
@@ -23,6 +22,10 @@ int	key_hook(int keycode, t_vars *vars)
 		forward(vars);
 	if (keycode == 1)
 		backward(vars);
+	if (keycode == 2)
+		right(vars);
+	if (keycode == 0)
+		left(vars);
 	return (keycode);
 }
 

@@ -23,6 +23,9 @@
 # ifndef DIGITS_AND_STUFF
 #  define DIGITS_AND_STUFF "-.0123456789"
 # endif
+# ifndef PI
+#  define  PI 3.1415
+# endif
 
 
 
@@ -62,5 +65,7 @@ void			rotate_player(t_vars *vars, int keycode);
 void			draw_stuff(t_vars vars);
 void			forward(t_vars *vars);
 void			backward(t_vars *vars);
+void			right(t_vars *vars);
+void			left(t_vars *vars);
 
 #endif
