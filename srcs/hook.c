@@ -14,22 +14,21 @@
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	if (keycode == 53)
+	if (keycode == MLX_KEY_ESC)
 		exit (0);
-	if (keycode == 123 || keycode == 124)
+	if (keycode == MLX_KEY_LEFT || keycode == MLX_KEY_RIGHT)
 		rotate_player(vars, keycode);
-	if (keycode == 13)
+	if (keycode == MLX_KEY_W)
 		forward(vars);
-	if (keycode == 1)
+	if (keycode == MLX_KEY_S)
 		backward(vars);
-	if (keycode == 2)
+	if (keycode == MLX_KEY_D)
 		right(vars);
-	if (keycode == 0)
+	if (keycode == MLX_KEY_A)
 		left(vars);
 	return (keycode);
 }
 
-/* w = 13	a = 0	d = 2	s = 1	<- =  123	-> = 124*/
 int	mouse_hook(int mouse_code, int x, int y, t_vars *vars)
 {
 	(void)vars;

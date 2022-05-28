@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <mlx.h>
+# include "mlx_keys.h"
 
 # ifndef DIGITS_AND_STUFF
 #  define DIGITS_AND_STUFF "-.0123456789"

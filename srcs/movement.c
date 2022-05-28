@@ -3,7 +3,7 @@
 #define mapHeight 24	
 #define ScreenWith 1080
 #define ScreenHeight 1080
-double speed = 0.5;
+double speed = 0.2;
 int worldMap2[mapWidth][mapHeight]=
 {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -66,7 +66,7 @@ void	rotate_player(t_vars *vars, int keycode)
 	double olddirx;
 	double oldplanex;
 
-	if (keycode == 124)
+	if (keycode == MLX_KEY_RIGHT)
 	{
 		olddirx = vars->player.dir_x;
 		vars->player.dir_x = vars->player.dir_x * cos(-.1) -  vars->player.dir_y * sin(-.1);
@@ -75,7 +75,7 @@ void	rotate_player(t_vars *vars, int keycode)
 		vars->player.plane_x = vars->player.plane_x * cos(-.1) -  vars->player.plane_y * sin(-.1);
 		vars->player.plane_y = oldplanex * sin(-.1) + vars->player.plane_y * cos(-.1);
 	}
-	else if (keycode == 123)
+	else if (keycode == MLX_KEY_LEFT)
 	{
 		olddirx = vars->player.dir_x;
 		vars->player.dir_x = vars->player.dir_x * cos(.1) -  vars->player.dir_y * sin(.1);
