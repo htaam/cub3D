@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 12:29:40 by mmota             #+#    #+#             */
-/*   Updated: 2022/05/27 22:58:03 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/29 21:42:58 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int		check_args(int argc, char *argv[]);
 int		check_extension (char *argv);
 void	print_board(t_game *game, int i);
 int		check_identifiers(t_game *game);
-void	map_isclosed(t_game *game, int i);
+void	check_map(t_game *game, int i);
 
 
 #endif

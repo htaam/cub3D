@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:53:17 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/27 23:04:55 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/29 23:05:20 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,30 @@ int	all_idtypes(int *idtypes)
 	return (1);
 }
 
+void	check_rgb(t_game *game, int i, char *s)
+{
+	size_t j;
+
+	j = 0;
+	int l = 0;
+	int n = 0;
+	j = 0;
+	while (!ft_strstr(game->board[i], s))
+		j++;
+	while (!ft_isdigit(game->board[i][j]) && game->board[i][j] != '-')
+		++j;
+	while (j < ft_strlen(game->board[i]))
+	{
+		n = ft_atoi(&game->board[i][j]);
+		if (n > 255 || n < 0)
+			error_exit("RGB is wrong");
+		while (game->board[i][j] != ',' && l < 1)
+			++j;
+		++j;
+		++l;
+	}
+}
+
 // Find and confirms that all the identifiers types are in the file
 // returns the line bellow which there must be a map
 int	check_identifiers(t_game *game)
@@ -81,9 +105,15 @@ int	check_identifiers(t_game *game)
 		if (ft_strstr(game->board[i], "EA ") != 0)
 			idtypes[3] += 1;
 		if (ft_strstr(game->board[i], "F ") != 0)
+		{
 			idtypes[4] += 1;
+			check_rgb(game, i, "F ");
+		}
 		if (ft_strstr(game->board[i], "C ") != 0)
+		{
 			idtypes[5] += 1;
+			check_rgb(game, i, "C ");
+		}
 		if (all_idtypes(idtypes))
 			return (++i);
 	}

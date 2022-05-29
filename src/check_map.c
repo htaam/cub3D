@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/27 23:06:31 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/29 21:45:16 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,22 @@ void	check_map_characters(t_game *game, int i)
 	}
 }
 
-void	map_isclosed(t_game *game, int i)
+void	map_closed(t_game *game, int i, int j)
+{
+	if (i < game->board_height - 1)
+	{
+		if (!ft_isalnum(game->board[i - 1][j]) || !ft_isalnum(game->board[i][j + 1]) || !ft_isalnum(game->board[i][j - 1]) || !ft_isalnum(game->board[i + 1][j]))
+			if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
+				error_exit("Board is not closed1");
+	}
+	else if (i == game->board_height - 1)
+	{
+		if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
+			error_exit("Board is not closed2");
+	}
+}
+
+void	check_map(t_game *game, int i)
 {
 	size_t	j;
 
@@ -101,17 +116,7 @@ void	map_isclosed(t_game *game, int i)
 		j = 0;
 		while (j < ft_strlen(game->board[i]))
 		{
-			if (i < game->board_height - 1)
-			{
-				if (!ft_isalnum(game->board[i - 1][j]) || !ft_isalnum(game->board[i][j + 1]) || !ft_isalnum(game->board[i][j - 1]) || !ft_isalnum(game->board[i + 1][j]))
-					if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
-						error_exit("Board is not closed1");
-			}
-			else if (i == game->board_height - 1)
-			{
-				if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
-					error_exit("Board is not closed2");
-			}
+			map_closed(game, i, j);
 			printf("%c", game->board[i][j]);
 			++j;
 		}

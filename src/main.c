@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:56:59 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/27 23:01:54 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/29 21:42:44 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char *argv[])
 	id_line = check_identifiers(&game);
 	if (id_line == 0)
 		error_exit("Error\nIdentifiers are not correct!");
-	map_isclosed(&game, id_line);
+	check_map(&game, id_line);
 	//print_board(&game, id_line);
 	//init_display(&game);
 	//mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);
