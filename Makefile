@@ -9,7 +9,8 @@ MLX =  -lmlx -lm -framework OpenGL -framework AppKit
 SRC = main.c \
 		movement.c\
 		hook.c \
-		aux1.c
+		aux1.c\
+		draw.c
 		
 SRCSFD = srcs/
 OBJSFD = objs/

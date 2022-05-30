@@ -28,7 +28,30 @@
 #  define  PI 3.1415
 # endif
 
+#define mapWidth 24
+#define mapHeight 24
+#define ScreenWith 1080
+#define ScreenHeight 1080
 
+typedef struct s_draw
+{
+	double	screen_x;
+	double	screen_y;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		mapx;
+	int		mapy;
+	double	sideDistx;
+	double	sideDisty;
+	double	deltaDistx;
+	double	deltaDisty;
+	int		stepx;
+	int		stepy;
+	int		side;
+	double	perpWallDist;
+	double	wallX;
+}				t_draw;
 
 typedef struct s_data
 {
