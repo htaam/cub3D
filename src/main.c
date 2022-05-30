@@ -34,6 +34,8 @@ int	main(int argc, char *argv[])
 	if (id_line == 0)
 		error_exit("Error\nIdentifiers are not correct!");
 	check_map(&game, id_line);
+
+	
 	//print_board(&game, id_line);
 	//init_display(&game);
 	//mlx_hook(game.mlx_win, 17, (1L << 2), &x_close, &game);
@@ -49,6 +51,7 @@ int	main(int argc, char *argv[])
 
 	aux = &vars;
 	init_stuff(&vars);
+	vars.game = &game;
 	vars.player.pos_x = 20;
 	vars.player.pos_y = 20;
 	vars.player.dir_x = -1;

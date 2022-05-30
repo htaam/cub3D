@@ -121,7 +121,7 @@ void	draw_stuff(t_vars vars)
 				mapy += stepy;
 				side = 1;
 			}
-			if (vars.game.board_width > 0)
+			if (vars.game->board[mapx][mapy] != '0')
 				hit = 1;
 		}
 		double perpWallDist;
@@ -138,7 +138,7 @@ void	draw_stuff(t_vars vars)
 			if (screen_y <= (min_height(perpWallDist)) && screen_y >= max_height(perpWallDist))
 			{
 				my_mlx_pixel_put(&image, screen_x,
-					screen_y, (create_trgb(100*side, vars.game.board[mapx][mapy]*50,
+					screen_y, (create_trgb(100*side, (int)vars.game->board[mapx][mapy] * 50,
 							100, 0)));
 			}
 			else if ( screen_y  > (min_height(perpWallDist)))

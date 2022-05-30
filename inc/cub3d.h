@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../libs/minilibx-linux/mlx.h"
-//# include "../libs/minilibx_opengl_20191021/mlx.h"
+# include "../libs/minilibx_opengl_20191021/mlx.h"
 # include "../libs/libft/src/libft.h"
 # include "mlx_keys.h"
 # ifndef DIGITS_AND_STUFF
@@ -87,7 +87,7 @@ typedef struct s_vars
 	void		*win;
 	t_data		image;
 	t_player	player;
-	t_game		game;
+	t_game		*game;
 }				t_vars;
 
 
