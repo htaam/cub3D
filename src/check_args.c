@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:36:51 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/29 23:45:36 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/30 16:48:29 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	check_extension(char *ext)
 	size = ft_strlen(&ext[i + 1]);
 	while (++i < size)
 	{
-		printf("%li\n", i);
 		if (ext[i] == '.')
 		{
 			i++;

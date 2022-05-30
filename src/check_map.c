@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/29 21:45:16 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/30 16:49:48 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ void	check_map_characters(t_game *game, int i)
 				}
 				if (game->board[i][j] != '1' && game->board[i][j] != '0')
 					flag++;
-				if (flag == 2)
-					error_exit("Map has more than one direction!");
 			}
 			++j;
 		}
 		++i;
 	}
+	if (flag != 1)
+		error_exit("Map has more or less than one direction!");
 }
 
 void	map_closed(t_game *game, int i, int j)
