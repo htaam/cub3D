@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 12:29:40 by mmota             #+#    #+#             */
-/*   Updated: 2022/05/30 12:26:37 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/30 17:35:38 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,6 @@
 #define mapHeight 24
 #define screenWidth 640
 #define screenHeight 480
-
-//typedef struct s_player
-//{
-//	//// Initial player position
-//	int	posX;
-//	int	posY;
-//	//// Initial direction vectors 
-//	double dirX; 
-//	double dirY;
-//	//// 2d raycaster "camera plane"
-//	double planeX;
-//	double planeY;
-//	int width;
-//	int height;
-//	int	direct;
-//	int	count;
-//}				t_player;
-
 
 //----------------------------------------------------------------------------
 typedef struct s_player
@@ -79,7 +61,23 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		cr;
+	int		cg;
+	int		cb;
+	int		fr;
+	int		fg;
+	int		fb;
 }				t_data;
+
+typedef struct s_rgb
+{
+	int		cr;
+	int		cg;
+	int		cb;
+	int		fr;
+	int		fg;
+	int		fb;
+}				t_rgb;
 
 typedef struct s_vars
 {
@@ -88,6 +86,7 @@ typedef struct s_vars
 	t_data		image;
 	t_player	player;
 	t_game		*game;
+	t_rgb		rgb;
 }				t_vars;
 
 

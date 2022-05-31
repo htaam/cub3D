@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:53:17 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/29 23:05:20 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/31 15:20:58 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ but does not validate correctly if the map is indented with tabs instead
 	gives a sagmentation fault
 */
 
+//int init_rgb(t_vars *vars, int n, char *s, int c)
+//{
+//	if (s == 'C')
+//	{
+//		if (c == 1)
+//		{
+//			game
+//		}
+//	}
+//}
+
 // Confirm that all id types are found
 int	all_idtypes(int *idtypes)
 {
@@ -66,6 +77,7 @@ void	check_rgb(t_game *game, int i, char *s)
 	j = 0;
 	int l = 0;
 	int n = 0;
+	//int c = 0;
 	j = 0;
 	while (!ft_strstr(game->board[i], s))
 		j++;
@@ -74,6 +86,7 @@ void	check_rgb(t_game *game, int i, char *s)
 	while (j < ft_strlen(game->board[i]))
 	{
 		n = ft_atoi(&game->board[i][j]);
+		//init_rgb(game, n, s, ++c);
 		if (n > 255 || n < 0)
 			error_exit("RGB is wrong");
 		while (game->board[i][j] != ',' && l < 1)
@@ -116,6 +129,8 @@ int	check_identifiers(t_game *game)
 		}
 		if (all_idtypes(idtypes))
 			return (++i);
+		if (ft_strstr(game->board[i], "1111") != 0)
+			error_exit("The file is not configured correctly!");
 	}
 	return (0);
 }
