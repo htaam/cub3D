@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/31 16:56:25 by marmota           #+#    #+#             */
+/*   Updated: 2022/05/31 17:11:44 by marmota          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -158,4 +170,16 @@ void	draw_stuff(t_vars vars)
 	}
 	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
 	mlx_destroy_image(vars.mlx, image.img);
+}
+
+void	init_vars(t_game *game)
+{
+	game->rgb.cr = -1;
+	game->rgb.cg = -1;
+	game->rgb.cb = -1;
+	game->rgb.fr = -1;
+	game->rgb.fg = -1;
+	game->rgb.fb = -1;
+	game->board = 0;
+	game->board_height = 0;
 }

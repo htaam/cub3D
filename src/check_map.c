@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/31 15:04:39 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/31 16:56:07 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "stdio.h"
 #include <string.h>
 
-int	vertical_empty_line(t_game *game, int i)
+void	vertical_empty_line(t_game *game, int i)
 {
 	size_t	j;
 	int		space;
@@ -35,14 +35,11 @@ int	vertical_empty_line(t_game *game, int i)
 					break ;
 			}
 			else
-			{
 				++i;
-				if (++space == game->board_height - start - 2)
-					error_exit("Board has a vertical empty line");
-			}
+			if (++space == game->board_height - start - 2)
+				error_exit("Board has a vertical empty line");
 		}
 	}
-	return (0);
 }
 
 int	empty_line(t_game *game, int i)
@@ -62,8 +59,10 @@ int	empty_line(t_game *game, int i)
 
 void	check_map_characters(t_game *game, int i)
 {
-	size_t j;
-	int flag = 0;
+	size_t	j;
+	int		flag;
+
+	flag = 0;
 	while (i < game->board_height)
 	{
 		j = 0;
@@ -71,12 +70,10 @@ void	check_map_characters(t_game *game, int i)
 		{
 			if (ft_isalnum(game->board[i][j]))
 			{
-				if (game->board[i][j] != '1' && game->board[i][j] != '0' 
-				&& game->board[i][j] != 'N' && game->board[i][j] != 'S'
+				if (game->board[i][j] != '1' && game->board[i][j] != '0' \
+				&& game->board[i][j] != 'N' && game->board[i][j] != 'S' \
 				&& game->board[i][j] != 'E' && game->board[i][j] != 'W')
-				{
 					error_exit("Map has invalid character!");
-				}
 				if (game->board[i][j] != '1' && game->board[i][j] != '0')
 					flag++;
 			}
@@ -92,7 +89,10 @@ void	map_closed(t_game *game, int i, int j)
 {
 	if (i < game->board_height - 1)
 	{
-		if (!ft_isalnum(game->board[i - 1][j]) || !ft_isalnum(game->board[i][j + 1]) || !ft_isalnum(game->board[i][j - 1]) || !ft_isalnum(game->board[i + 1][j]))
+		if (!ft_isalnum(game->board[i - 1][j]) \
+		|| !ft_isalnum(game->board[i][j + 1]) \
+		|| !ft_isalnum(game->board[i][j - 1]) \
+		|| !ft_isalnum(game->board[i + 1][j]))
 			if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 				error_exit("Board is not closed1");
 	}

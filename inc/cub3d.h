@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 12:29:40 by mmota             #+#    #+#             */
-/*   Updated: 2022/05/31 15:55:26 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/31 17:14:06 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,9 @@ int				check_extension (char *argv);
 void			print_board(t_game *game, int i);
 int				check_identifiers(t_game *game);
 void			check_map(t_game *game, int i);
+void			init_rgb(t_game *game, int n, char *s, int c);
+void			check_rgb(t_game *game, int i, char *s);
+
 
 //Cub3d-2
 void			init_stuff(t_vars *vars);

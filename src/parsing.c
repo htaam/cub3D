@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:53:17 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/31 16:43:07 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/31 17:14:21 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,32 +44,6 @@ but does not validate correctly if the map is indented with tabs instead
 	if there is an empty line at the end or middle of the map..
 	gives a sagmentation fault
 */
-
-void	init_rgb(t_game *game, int n, char *s, int c)
-{
-	if (ft_strchr(s, 'C') == 0)
-	{
-		if (c == 1)
-			game->rgb.cr = n;
-		else if (c == 2)
-			game->rgb.cg = n;
-		else if (c == 3)
-			game->rgb.cb = n;
-	}
-	else if (ft_strchr(s, 'F') == 0)
-	{
-		if (c == 1)
-			game->rgb.fr = n;
-		else if (c == 2)
-			game->rgb.fg = n;
-		else if (c == 3)
-			game->rgb.fb = n;
-	}
-	if (n < 0 || n > 255)
-		error_exit("Invalid RGB value");
-	printf("rgb: %i,\n", n);
-}
-
 // Confirm that all id types are found
 int	all_idtypes(int *idtypes)
 {
@@ -84,37 +58,9 @@ int	all_idtypes(int *idtypes)
 	return (1);
 }
 
-void	check_rgb(t_game *game, int i, char *s)
-{
-	size_t j;
-
-	j = 0;
-	int n = 0;
-	int c = 0;
-	j = 0;
-	while (!ft_strstr(game->board[i], s))
-		j++;
-	while (!ft_isdigit(game->board[i][j]) && game->board[i][j] != '-')
-	{
-		++j;
-	}
-	while (j < ft_strlen(game->board[i]) && ++c <= 3)
-	{
-		n = ft_atoi(&game->board[i][j]);
-		init_rgb(game, n, s, c);
-		if (n > 255 || n < 0)
-			error_exit("RGB is wrong");
-		while (game->board[i][j] != ',')
-			++j;
-		++j;
-	}
-	printf("c: %i\n", c);
-	if (c != 3)
-		error_exit("No RGB value submited!");
-}
-
 // Find and confirms that all the identifiers types are in the file
 // returns the line bellow which there must be a map
+
 int	check_identifiers(t_game *game)
 {
 	int	idtypes[6];
@@ -201,17 +147,4 @@ void	read_map(t_game *game, char *board)
 		game->board[y] = line;
 	free(line);
 	close(fd);
-}
-
-// Init necessary board variables
-void	init_vars(t_game *game)
-{
-	game->rgb.cr = -1;
-	game->rgb.cg = -1;
-	game->rgb.cb = -1;
-	game->rgb.fr = -1;
-	game->rgb.fg = -1;
-	game->rgb.fb = -1;
-	game->board = 0;
-	game->board_height = 0;
 }

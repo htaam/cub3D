@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:34:58 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/30 12:15:58 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/31 16:45:42 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	x_close(t_game *game)
 		free(game->mlx);
 	exit(EXIT_SUCCESS);
 }
-
-#include "cub3d.h"
 
 int	get_distance(int *xy1, int *xy2)
 {
