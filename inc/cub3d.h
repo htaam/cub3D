@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 12:29:40 by mmota             #+#    #+#             */
-/*   Updated: 2022/05/30 17:35:38 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/31 15:55:26 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,6 @@ typedef struct s_player
 	double	plane_y;
 }				t_player;
 
-typedef struct s_game
-{
-	t_player	player;
-	void		*mlx;
-	void		*mlx_win;
-	char		**board;
-	int			board_height;
-	size_t		board_width;
-}				t_game;
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		cr;
-	int		cg;
-	int		cb;
-	int		fr;
-	int		fg;
-	int		fb;
-}				t_data;
-
 typedef struct s_rgb
 {
 	int		cr;
@@ -79,6 +54,26 @@ typedef struct s_rgb
 	int		fb;
 }				t_rgb;
 
+typedef struct s_game
+{
+	t_player	player;
+	void		*mlx;
+	void		*mlx_win;
+	char		**board;
+	int			board_height;
+	size_t		board_width;
+	t_rgb		rgb;
+}				t_game;
+
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
 typedef struct s_vars
 {
 	void		*mlx;
@@ -86,7 +81,6 @@ typedef struct s_vars
 	t_data		image;
 	t_player	player;
 	t_game		*game;
-	t_rgb		rgb;
 }				t_vars;
 
 
@@ -111,14 +105,6 @@ void	read_map(t_game *game, char *board);
 void	draw_background(t_game *game);
 void	init_player(t_game *game, int y, int x);
 void	draw_board(t_game *game);
-
-////	Key_Actions
-//int		handle_keypress(int key_code, t_game *game);
-//void	up(t_game *game);
-//void	left(t_game *game);
-//void	down(t_game *game);
-//void	right(t_game *game);
-
 
 // Utils
 //void	game_exit(t_game *game, char *message);
