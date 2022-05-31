@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:56:59 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/30 17:46:51 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/31 20:46:22 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	main(int argc, char *argv[])
 	vars.player.plane_y = 0.5;
 	draw_stuff(vars);
  	mlx_hook(vars.win, 4, 0L, mouse_hook, aux);
-	mlx_hook(vars.win, 17, 0L, red_cross, aux);
-	mlx_hook(vars.win, 2, 0L, key_hook, aux);
+	mlx_hook(vars.win, 17, (1L << 2), red_cross, aux);
+	mlx_hook(vars.win, 2, (1L << 0), key_hook, aux);
 	mlx_loop(vars.mlx);	
 	return (0);
 }

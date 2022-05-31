@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:56:25 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/31 17:11:44 by marmota          ###   ########.fr       */
+/*   Updated: 2022/05/31 20:57:34 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,14 +156,14 @@ void	draw_stuff(t_vars vars)
 			else if ( screen_y  > (min_height(perpWallDist)))
 			{
 				my_mlx_pixel_put(&image, screen_x,
-					screen_y, (create_trgb(0, 50,
-							50, 50)));
+					screen_y, (create_trgb(0, vars.game->rgb.cr,
+							vars.game->rgb.cg, vars.game->rgb.cb)));
 			}
 			else
 			{
 				my_mlx_pixel_put(&image, screen_x,
-					screen_y, (create_trgb(0, 200,
-							100, 100)));
+					screen_y, (create_trgb(0, vars.game->rgb.fr,
+							vars.game->rgb.fg, vars.game->rgb.fb)));
 			}
 		}
 		
