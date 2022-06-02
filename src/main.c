@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:56:59 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/31 20:46:22 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/02 13:51:54 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(int argc, char *argv[])
 	aux = &vars;
 	init_stuff(&vars);
 	vars.game = &game;
-	vars.player.pos_x = 20;
-	vars.player.pos_y = 20;
+	vars.player.pos_x = game.player.pos_x;
+	vars.player.pos_y = game.player.pos_y;
 	vars.player.dir_x = -1;
 	vars.player.dir_y = 0;
 	vars.player.plane_x = 0;

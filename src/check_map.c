@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/31 16:56:07 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/02 13:48:24 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	check_map_characters(t_game *game, int i)
 	size_t	j;
 	int		flag;
 
-	flag = 0;
+	flag = -1;
 	while (i < game->board_height)
 	{
 		j = 0;
@@ -75,13 +75,17 @@ void	check_map_characters(t_game *game, int i)
 				&& game->board[i][j] != 'E' && game->board[i][j] != 'W')
 					error_exit("Map has invalid character!");
 				if (game->board[i][j] != '1' && game->board[i][j] != '0')
-					flag++;
+				{
+					flag = game->board[i][j];
+					game->player.pos_x = i;
+					game->player.pos_y = j;
+				}
 			}
 			++j;
 		}
 		++i;
 	}
-	if (flag != 1)
+	if (flag < 0)
 		error_exit("Map has more or less than one direction!");
 }
 
