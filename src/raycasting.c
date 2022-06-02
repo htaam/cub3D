@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:56:25 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/31 20:57:34 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/02 13:24:50 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,14 @@ void	draw_stuff(t_vars vars)
 		{
 			if (screen_y <= (min_height(perpWallDist)) && screen_y >= max_height(perpWallDist))
 			{
-				my_mlx_pixel_put(&image, screen_x,
-					screen_y, (create_trgb(100*side, (int)vars.game->board[mapx][mapy] * 50,
-							100, 0)));
+				if (side == 0)
+				{
+					my_mlx_pixel_put(&image, screen_x, screen_y, (create_trgb(0,125,125,125)));
+				}
+				else
+				{
+					my_mlx_pixel_put(&image, screen_x, screen_y, (create_trgb(0,105,105,105)));
+				}
 			}
 			else if ( screen_y  > (min_height(perpWallDist)))
 			{

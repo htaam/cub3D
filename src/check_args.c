@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:36:51 by marmota           #+#    #+#             */
-/*   Updated: 2022/05/30 16:48:29 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/02 13:32:44 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	check_args(int argc, char *argv[])
 {
 	if (argc != 2)
 		error_exit("Not enough arguments!");
-	check_extension(argv[1]);
+	if (access(argv[1], F_OK) != -1)
+		check_extension(argv[1]);
+	else
+		error_exit("map does not exist!");
 	return (EXIT_SUCCESS);
 }
 
@@ -28,7 +31,7 @@ int	check_extension(char *ext)
 	size_t		size;
 
 	i = -1;
-	size = ft_strlen(&ext[i + 1]);
+	size = ft_strlen(ext);
 	while (++i < size)
 	{
 		if (ext[i] == '.')
