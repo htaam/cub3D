@@ -2,10 +2,10 @@
 NAME				:=		cub3d
 
 # Paths
-PATH_SRC			:=		src
+PATH_SRC			:=		srcs
 PATH_BUILD			:=		build
 PATH_LIBS			:=		libs
-PATH_INC			:=		inc
+PATH_INC			:=		includes
 PATH_LIBFT			:=		$(PATH_LIBS)/libft
 PATH_LIBMLX_MAC		:=		$(PATH_LIBS)/minilibx_opengl_20191021
 PATH_LIBMLX_LINUX	:=		$(PATH_LIBS)/minilibx-linux

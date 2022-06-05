@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:56:59 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/02 13:51:54 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:43:03 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char *argv[])
 	vars.player.dir_y = 0;
 	vars.player.plane_x = 0;
 	vars.player.plane_y = 0.5;
+	game.wall = mlx_xpm_file_to_image(vars.mlx, game.path, &game.w, &game.h);
 	draw_stuff(vars);
  	mlx_hook(vars.win, 4, 0L, mouse_hook, aux);
 	mlx_hook(vars.win, 17, (1L << 2), red_cross, aux);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:56:25 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/02 13:24:50 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/05 15:54:02 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int min_height(double wall_distance)
         return ( ScreenHeight - 1);
     return(drawEnd); 
 }
-
 
 void	draw_stuff(t_vars vars)
 {
@@ -179,6 +178,9 @@ void	draw_stuff(t_vars vars)
 
 void	init_vars(t_game *game)
 {
+	game->w = 0;
+	game->h = 0;
+	game->path = "./assets/textures/path.xpm";
 	game->rgb.cr = -1;
 	game->rgb.cg = -1;
 	game->rgb.cb = -1;

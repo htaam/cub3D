@@ -6,12 +6,31 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:34:58 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/03 20:54:31 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/03 16:22:31 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdio.h>
+
+void	init_vars(t_game *game)
+{
+	game->rgb.cr = -1;
+	game->rgb.cg = -1;
+	game->rgb.cb = -1;
+	game->rgb.fr = -1;
+	game->rgb.fg = -1;
+	game->rgb.fb = -1;
+	game->board = 0;
+	game->board_height = 0;
+}
+
+
+int	error_exit(char *message)
+{
+	printf("%s\n", message);
+	exit(EXIT_FAILURE);
+}
 
 // Prints board
 void	print_board(t_game *game, int i)
@@ -49,23 +68,3 @@ int	x_close(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
-int	get_distance(int *xy1, int *xy2)
-{
-	int	c;
-
-	c = sqrt(pow((xy1[0] - xy2[0]), 2) + (pow((xy1[1] - xy2[1]), 2)));
-	return (c);
-}
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}

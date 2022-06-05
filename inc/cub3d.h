@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 12:29:40 by mmota             #+#    #+#             */
-/*   Updated: 2022/06/02 13:51:59 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:35:04 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ typedef struct s_game
 	int			board_height;
 	size_t		board_width;
 	t_rgb		rgb;
+	char		*path;
+	void		*wall;
+	int			w;
+	int			h;
 }				t_game;
 
 typedef struct s_data
