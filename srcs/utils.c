@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:34:58 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/03 16:22:31 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/06 23:30:07 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,12 @@ int	x_close(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
+int *zero_array(int *array)
+{
+	int i;
+	
+	i = 0;
+	while (i < 6)
+		array[i++] = 0;
+	return (array);
+}

@@ -20,18 +20,19 @@ void	init_stuff(t_vars *vars)
 int	main(int argc, char *argv[])
 {
 	t_game	game;
-	t_vars		vars;
-    void		*aux;
+	t_vars	vars;
+    void	*aux;
 	int		id_line;
+	int		idtypes[6];
 
-	id_line = 0;
+
+	id_line = -1;
 	if (check_args(argc, argv) != 0)
 		return (1);
 	init_vars(&game);
 	read_map(&game, argv[1]);
-	id_line = check_identifiers(&game);
-	if (id_line == 0)
-		error_exit("Error\nIdentifiers are not correct!");
+	zero_array(idtypes);
+	id_line = check_identifiers(&game, idtypes);
 	check_map(&vars, &game, id_line);
 	//print_board(&game, id_line);
 	aux = &vars;

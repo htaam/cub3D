@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 17:12:47 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/02 19:01:59 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/07 00:00:54 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	check_rgb(t_game *game, int i, char *s)
 		{
 			while (game->board[i][j] != ',')
 				++j;
+			if (ft_isdigit(game->board[i][j + 1]) == 0)
+				error_exit("Error\nInvalid RGB value");
 		}
 		++j;
 	}
