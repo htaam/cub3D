@@ -16,35 +16,32 @@
 
 void	get_player_pos_dir(t_vars *vars, int i, int j, char dir)
 {
-	vars->player.pos_x = i;
-	vars->player.pos_y = j;
-	if (dir == 'N')
+	vars->player.pos_x = i + 0.5;
+	vars->player.pos_y = j + 0.5;
+	vars->player.dir_x = -1;
+	vars->player.dir_y = 0;
+	vars->player.plane_x = 0;
+	vars->player.plane_y = 0.5;
+	if (dir == 'S')
 	{
-		vars->player.dir_x = -1;
-		vars->player.dir_y = 0;
-		vars->player.plane_x = 0;
-		vars->player.plane_y = 0.5;
-	}
-	else if (dir == 'S')
-	{
-		vars->player.dir_x = 1;
-		vars->player.dir_y = 0;
-		vars->player.plane_x = 0;
-		vars->player.plane_y = -0.5;
+		vars->player.dir_x = vars->player.dir_x * cos(PI) -  vars->player.dir_y * sin(PI);
+		vars->player.dir_y = -1 * sin(PI) + vars->player.dir_y * cos(PI);
+		vars->player.plane_x = vars->player.plane_x * cos(PI) -  vars->player.plane_y * sin(PI);
+		vars->player.plane_y = 0 * sin(PI) + vars->player.plane_y * cos(PI);
 	}
 	else if (dir == 'E')
 	{
-		vars->player.dir_x = 0;
-		vars->player.dir_y = 1;
-		vars->player.plane_x = -0.5;
-		vars->player.plane_y = 0;
+		vars->player.dir_x = vars->player.dir_x * cos(-PI/2) -  vars->player.dir_y * sin(-PI/2);
+		vars->player.dir_y = -1 * sin(-PI/2) + vars->player.dir_y * cos(-PI/2);
+		vars->player.plane_x = vars->player.plane_x * cos(-PI/2) -  vars->player.plane_y * sin(-PI/2);
+		vars->player.plane_y = 0 * sin(-PI/2) + vars->player.plane_y * cos(-PI/2);
 	}
 	else if (dir == 'W')
 	{
-		vars->player.dir_x = 0;
-		vars->player.dir_y = -1;
-		vars->player.plane_x = 0.5;
-		vars->player.plane_y = 0;
+		vars->player.dir_x = vars->player.dir_x * cos(PI/2) -  vars->player.dir_y * sin(PI/2);
+		vars->player.dir_y = -1 * sin(PI/2) + vars->player.dir_y * cos(PI/2);
+		vars->player.plane_x = vars->player.plane_x * cos(PI/2) -  vars->player.plane_y * sin(PI/2);
+		vars->player.plane_y = 0 * sin(PI/2) + vars->player.plane_y * cos(PI/2);
 	}
 }
 

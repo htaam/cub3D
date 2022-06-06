@@ -33,7 +33,7 @@ void final_draw(t_vars vars, t_draw draw, t_data image, int screen_x)
 		if (screen_y <= (min_height(draw.perpWallDist)) && screen_y >= max_height(draw.perpWallDist))
 		{
 			my_mlx_pixel_put(&image, screen_x,
-				screen_y, (create_trgb(100*draw.side, draw.wallX * vars.game->board[draw.mapx][draw.mapy]*50,
+				screen_y, (create_trgb(100*draw.side, draw.wallX * vars.game->board[draw.mapx][draw.mapy],
 						100, 0)));
 		}
 		else if ( screen_y  > (min_height(draw.perpWallDist)))
@@ -127,7 +127,7 @@ void	draw_stuff(t_vars vars)
 				else
 					draw.side = 4;
 			}
-			if (vars.game->board[draw.mapx][draw.mapy] > '0')
+			if (vars.game->board[draw.mapx][draw.mapy] == '1')
 				hit = 1;
 		}
 		
