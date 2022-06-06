@@ -32,17 +32,11 @@ int	main(int argc, char *argv[])
 	id_line = check_identifiers(&game);
 	if (id_line == 0)
 		error_exit("Error\nIdentifiers are not correct!");
-	check_map(&game, id_line);
+	check_map(&vars, &game, id_line);
 	//print_board(&game, id_line);
 	aux = &vars;
 	init_stuff(&vars);
 	vars.game = &game;
-	vars.player.pos_x = game.player.pos_x;
-	vars.player.pos_y = game.player.pos_y;
-	vars.player.dir_x = -1;
-	vars.player.dir_y = 0;
-	vars.player.plane_x = 0;
-	vars.player.plane_y = 0.5;
 	draw_stuff(vars);
  	mlx_hook(vars.win, 4, 0L, mouse_hook, aux);
 	mlx_hook(vars.win, 17, (1L << 2), red_cross, aux);

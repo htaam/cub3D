@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:57:38 by tmatias           #+#    #+#             */
-/*   Updated: 2022/06/03 19:35:15 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/06 12:51:55 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ typedef struct s_rgb
 
 typedef struct s_game
 {
-	t_player	player;
 	void		*mlx;
 	void		*mlx_win;
 	char		**board;
@@ -118,7 +117,7 @@ void			left(t_vars *vars);
 int				error_exit(char *message);
 int				check_extension(char *ext);
 int				check_args(int argc, char *argv[]);
-void			check_map(t_game *game, int i);
+void			check_map(t_vars *vars, t_game *game, int i);
 int				check_identifiers(t_game *game);
 void			check_rgb(t_game *game, int i, char *s);
 int				x_close(t_game *game);

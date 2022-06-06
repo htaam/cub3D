@@ -6,13 +6,47 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/02 13:48:24 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/06 14:43:57 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "stdio.h"
 #include <string.h>
+
+void	get_player_pos_dir(t_vars *vars, int i, int j, char dir)
+{
+	vars->player.pos_x = i;
+	vars->player.pos_y = j;
+	if (dir == 'N')
+	{
+		vars->player.dir_x = -1;
+		vars->player.dir_y = 0;
+		vars->player.plane_x = 0;
+		vars->player.plane_y = 0.5;
+	}
+	else if (dir == 'S')
+	{
+		vars->player.dir_x = 1;
+		vars->player.dir_y = 0;
+		vars->player.plane_x = 0;
+		vars->player.plane_y = -0.5;
+	}
+	else if (dir == 'E')
+	{
+		vars->player.dir_x = 0;
+		vars->player.dir_y = 1;
+		vars->player.plane_x = -0.5;
+		vars->player.plane_y = 0;
+	}
+	else if (dir == 'W')
+	{
+		vars->player.dir_x = 0;
+		vars->player.dir_y = -1;
+		vars->player.plane_x = 0.5;
+		vars->player.plane_y = 0;
+	}
+}
 
 void	vertical_empty_line(t_game *game, int i)
 {
@@ -57,7 +91,7 @@ int	empty_line(t_game *game, int i)
 	return (1);
 }
 
-void	check_map_characters(t_game *game, int i)
+void	check_map_characters(t_vars *vars, t_game *game, int i)
 {
 	size_t	j;
 	int		flag;
@@ -77,8 +111,7 @@ void	check_map_characters(t_game *game, int i)
 				if (game->board[i][j] != '1' && game->board[i][j] != '0')
 				{
 					flag = game->board[i][j];
-					game->player.pos_x = i;
-					game->player.pos_y = j;
+					get_player_pos_dir(vars, i, j, flag);
 				}
 			}
 			++j;
@@ -107,14 +140,14 @@ void	map_closed(t_game *game, int i, int j)
 	}
 }
 
-void	check_map(t_game *game, int i)
+void	check_map(t_vars *vars, t_game *game, int i)
 {
 	size_t	j;
 
 	while (empty_line(game, i))
 		++i;
 	vertical_empty_line(game, i);
-	check_map_characters(game, i);
+	check_map_characters(vars, game, i);
 	while (i < game->board_height)
 	{
 		j = 0;
