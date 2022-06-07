@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 17:12:47 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/07 00:00:54 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/07 01:28:59 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	init_rgb(t_game *game, int n, char *s, int c)
 			game->rgb.fb = n;
 	}
 	if (n < 0 || n > 255)
-		error_exit("Invalid RGB value");
+		error_exit("Error\nInvalid RGB value");
 }
 
 void	check_rgb(t_game *game, int i, char *s)
@@ -50,7 +50,10 @@ void	check_rgb(t_game *game, int i, char *s)
 	while (!ft_strstr(game->board[i], s))
 		j++;
 	while (!ft_isdigit(game->board[i][j]) && game->board[i][j] != '-')
-		++j;
+		if (j != ft_strlen(game->board[i]))
+			++j;
+		else
+			error_exit("Error\nNo value submited");
 	while (++c < 4)
 	{
 		n = ft_atoi(&game->board[i][j]);
@@ -58,12 +61,21 @@ void	check_rgb(t_game *game, int i, char *s)
 		if (c < 3)
 		{
 			while (game->board[i][j] != ',')
-				++j;
+			{
+				if (ft_isdigit(game->board[i][j]))
+					++j;
+				else
+					error_exit("Error\nNo RGB value submited");
+			}
 			if (ft_isdigit(game->board[i][j + 1]) == 0)
-				error_exit("Error\nInvalid RGB value");
+				error_exit("Error\nToo many comas");
 		}
 		++j;
 	}
+	while (ft_isdigit(game->board[i][j]))
+		++j;
 	if (c != 4)
-		error_exit("No RGB value submited!");
+		error_exit("Error\nNo RGB value submited!");
+	if (j < ft_strlen(game->board[i]))
+		error_exit("Error\nToo many values");
 }

@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:53:17 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/06 23:47:36 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/07 01:20:08 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ int	check_identifiers(t_game *game, int *idtypes)
 			check_rgb(game, i, "C ");
 		}
 		if (all_idtypes(idtypes))
+		{
 			return (++i);
+		}
 		if (ft_strstr(game->board[i], "1111") != 0)
-			error_exit("The file is not configured correctly!");
+			error_exit("Error\nThe file is not configured correctly!");
 	}
 	return (0);
 }
