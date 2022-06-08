@@ -6,13 +6,12 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/06 14:43:57 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/07 23:00:06 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "stdio.h"
-#include <string.h>
 
 void	get_player_pos_dir(t_vars *vars, int i, int j, char dir)
 {

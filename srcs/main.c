@@ -38,6 +38,7 @@ int	main(int argc, char *argv[])
 	aux = &vars;
 	init_stuff(&vars);
 	vars.game = &game;
+	init_textures(&vars);
 	draw_stuff(vars);
  	mlx_hook(vars.win, 4, 0L, mouse_hook, aux);
 	mlx_hook(vars.win, 17, (1L << 2), red_cross, aux);

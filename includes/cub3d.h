@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:57:38 by tmatias           #+#    #+#             */
-/*   Updated: 2022/06/06 23:47:47 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/08 17:15:07 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@
 #define ScreenWith 1080
 #define ScreenHeight 1080
 
+typedef struct s_img
+{
+	char	*relative_path;
+	int		img_width;
+	int		img_height;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		*data;
+}			t_img;
+
 typedef struct s_draw
 {
 	double	screen_x;
@@ -52,6 +65,7 @@ typedef struct s_draw
 	int		side;
 	double	perpWallDist;
 	double	wallX;
+	char 	*texture[4];
 }				t_draw;
 
 typedef struct s_data
@@ -100,6 +114,7 @@ typedef struct s_vars
 	t_data		image;
 	t_player	player;
 	t_game		*game;
+	t_img		*img;
 }				t_vars;
 
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -127,6 +142,8 @@ int				all_idtypes(int *idtypes);
 void			read_map(t_game *game, char *board);
 //Utils
 int				*zero_array(int *array);
+
+t_img			init_textures(t_vars *vars);
 
 
 #endif
