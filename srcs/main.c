@@ -48,20 +48,37 @@ void	init_stuff(t_vars *vars)
 int	main(int argc, char **argv)
 {
 	t_vars		vars;
-    void		*aux;
+	void		*aux;
+	t_data	image;
 
 	aux = &vars;
 	init_stuff(&vars);
 	(void)argv;
 	(void)argc;
+
+
+
+
 	vars.player.pos_x = 10;
 	vars.player.pos_y = 10;
 	vars.player.dir_x = -1;
 	vars.player.dir_y = 0;
 	vars.player.plane_x = 0;
 	vars.player.plane_y = 0.5;
-	draw_stuff(vars);
+	//draw_stuff(vars);
 	
+	image.img = mlx_new_image(vars.mlx, ScreenWith,
+			ScreenHeight);
+	image.addr = mlx_get_data_addr(image.img,
+			&image.bits_per_pixel,
+			&image.line_length, &image.endian);
+	int with;
+	int hei;
+	t_data *test;
+	test = mlx_xpm_file_to_image(vars.mlx, "test.xpm", &with, &hei);
+
+	mlx_put_image_to_window(vars.mlx, vars.win, test, 0, 0);
+	mlx_destroy_image(vars.mlx, image.img);
  
  	mlx_hook(vars.win, 4, 0L, mouse_hook, aux);
 	mlx_hook(vars.win, 17, 0L, red_cross, aux);
