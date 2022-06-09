@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:53:17 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/07 01:20:08 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/09 14:44:19 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,43 @@ int	all_idtypes(int *idtypes)
 	}
 	return (1);
 }
+char	*get_texture_path(t_game *game, int i, char c)
+{
+	char *path = game->board[i];
+	while (*path != c)
+		path++;
+	path += 2;
+	while (*path == ' ')
+		path++;
+	return (path);
+}
 
 int	check_textures(t_game *game, int *idtypes, int i)
 {
 	if (ft_strnstr(game->board[i], "NO ", 3) != 0)
+	{
+		game->texture.NO_path = get_texture_path(game, i, 'N');
 		idtypes[0] += 1;
+		printf("%s\n", game->texture.NO_path);
+	}
 	if (ft_strnstr(game->board[i], "SO ", 3) != 0)
+	{
+		game->texture.SO_path = get_texture_path(game, i, 'S');
 		idtypes[1] += 1;
+		printf("%s\n", game->texture.SO_path);
+	}
 	if (ft_strnstr(game->board[i], "WE ", 3) != 0)
+	{
+		game->texture.WE_path = get_texture_path(game, i, 'W');
 		idtypes[2] += 1;
+		printf("%s\n", game->texture.WE_path);
+	}
 	if (ft_strnstr(game->board[i], "EA ", 3) != 0)
+	{
+		game->texture.EA_path = get_texture_path(game, i, 'E');
 		idtypes[3] += 1;
+		printf("%s\n", game->texture.EA_path);
+	}
 	return (i);
 }
 

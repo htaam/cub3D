@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:57:38 by tmatias           #+#    #+#             */
-/*   Updated: 2022/06/08 17:15:07 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/09 14:38:44 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		*data;
+	int 	*data;
 }			t_img;
 
 typedef struct s_draw
@@ -97,6 +97,14 @@ typedef struct s_rgb
 	int		fb;
 }				t_rgb;
 
+typedef struct s_texture
+{
+	char	*NO_path;
+	char	*SO_path;
+	char	*EA_path;
+	char	*WE_path;
+}				t_texture;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -105,6 +113,7 @@ typedef struct s_game
 	int			board_height;
 	size_t		board_width;
 	t_rgb		rgb;
+	t_texture	texture;
 }				t_game;
 
 typedef struct s_vars
