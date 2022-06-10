@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:57:38 by tmatias           #+#    #+#             */
-/*   Updated: 2022/06/09 14:38:44 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/10 19:25:17 by mmota            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void			right(t_vars *vars);
 void			left(t_vars *vars);
 //--------------------------------------------------
 int				error_exit(char *message);
-int				check_extension(char *ext);
+int				check_map_extension(char *ext);
 int				check_args(int argc, char *argv[]);
 void			check_map(t_vars *vars, t_game *game, int i);
 int				check_identifiers(t_game *game, int *idtypes);
@@ -152,6 +152,8 @@ int				*zero_array(int *array);
 t_img			init_textures(t_vars *vars);
 
 int		my_mlx_pixel_get(t_img *data, int x, int y);
+int	check_texture_extension(char *ext);
+
 
 
 #endif

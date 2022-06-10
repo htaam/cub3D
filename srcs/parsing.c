@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:53:17 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/09 14:44:19 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/10 21:27:28 by mmota            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,23 @@ int	all_idtypes(int *idtypes)
 }
 char	*get_texture_path(t_game *game, int i, char c)
 {
-	char *path = game->board[i];
+	char *path;
+	int fd;
+
+	path = game->board[i];
 	while (*path != c)
 		path++;
 	path += 2;
-	while (*path == ' ')
-		path++;
+	if (ft_strnstr(path, " ./", 3))
+		path += 3;
+	printf("%s\n", path);
+	fd = open(path, O_RDONLY);
+	if (fd > -1)
+		close(fd);
+	else
+		error_exit("Invalid texture");
+	if (check_texture_extension(path))
+		return (path);
 	return (path);
 }
 

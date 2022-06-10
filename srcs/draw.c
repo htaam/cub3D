@@ -64,7 +64,6 @@ void	draw_stuff(t_vars vars)
 	image.addr = mlx_get_data_addr(image.img,
 			&image.bits_per_pixel,
 			&image.line_length, &image.endian);
-	init_textures(&vars);
 	while (++screen_x < ScreenWith)
 	{
 		draw.camera_x = 2 * (screen_x / ScreenWith) - 1;
