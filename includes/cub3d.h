@@ -134,6 +134,11 @@ void			forward(t_vars *vars);
 void			backward(t_vars *vars);
 void			right(t_vars *vars);
 void			left(t_vars *vars);
+
+void			draw_aux1(t_draw *draw, t_vars vars);
+void 			draw_aux2(t_draw *draw, t_vars vars, int hit);
+void 			draw_aux3(t_draw *draw, t_vars vars);
+void			draw_aux4(t_draw *draw, t_vars vars);
 //--------------------------------------------------
 int				error_exit(char *message);
 int				check_extension(char *ext);
