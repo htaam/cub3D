@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 17:12:47 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/07 01:28:59 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/10 21:47:37 by mmota            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,41 @@ void	init_rgb(t_game *game, int n, char *s, int c)
 		error_exit("Error\nInvalid RGB value");
 }
 
+void	rgb_validity(t_game *game, int i, size_t j, int c)
+{
+	while (ft_isdigit(game->board[i][j]))
+		++j;
+	if (c != 4)
+		error_exit("Error\nNo RGB value submited!");
+	if (j < ft_strlen(game->board[i]))
+		error_exit("Error\nToo many values");
+}
+
+int	check_rgb_submit(t_game *game, int i, char *s)
+{
+	size_t	j;
+
+	j = 0;
+	while (!ft_strstr(game->board[i], s))
+		j++;
+	while (!ft_isdigit(game->board[i][j]) && game->board[i][j] != '-')
+	{
+		if (j != ft_strlen(game->board[i]))
+			++j;
+		else
+			error_exit("Error\nNo value submited");
+	}
+	return (j);
+}
+
 void	check_rgb(t_game *game, int i, char *s)
 {
 	size_t	j;
 	int		n;
 	int		c;
 
-	n = 0;
 	c = 0;
-	j = 0;
-	while (!ft_strstr(game->board[i], s))
-		j++;
-	while (!ft_isdigit(game->board[i][j]) && game->board[i][j] != '-')
-		if (j != ft_strlen(game->board[i]))
-			++j;
-		else
-			error_exit("Error\nNo value submited");
+	j = check_rgb_submit(game, i, s);
 	while (++c < 4)
 	{
 		n = ft_atoi(&game->board[i][j]);
@@ -72,10 +91,5 @@ void	check_rgb(t_game *game, int i, char *s)
 		}
 		++j;
 	}
-	while (ft_isdigit(game->board[i][j]))
-		++j;
-	if (c != 4)
-		error_exit("Error\nNo RGB value submited!");
-	if (j < ft_strlen(game->board[i]))
-		error_exit("Error\nToo many values");
+	rgb_validity(game, i, j, c);
 }

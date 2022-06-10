@@ -1,36 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/10 21:58:00 by mmota             #+#    #+#             */
+/*   Updated: 2022/06/10 22:02:46 by mmota            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	rotate_player(t_vars *vars, int keycode)
-{
-	double	olddirx;
-	double	oldplanex;
-
-	if (keycode == MLX_KEY_RIGHT)
-	{
-		olddirx = vars->player.dir_x;
-		vars->player.dir_x = vars->player.dir_x
-			* cos(-.1) - vars->player.dir_y * sin(-.1);
-		vars->player.dir_y = olddirx * sin(-.1) + vars->player.dir_y * cos(-.1);
-		oldplanex = vars->player.plane_x;
-		vars->player.plane_x = vars->player.plane_x
-			* cos(-.1) - vars->player.plane_y * sin(-.1);
-		vars->player.plane_y = oldplanex * sin(-.1)
-			+ vars->player.plane_y * cos(-.1);
-	}
-	else if (keycode == MLX_KEY_LEFT)
-	{
-		olddirx = vars->player.dir_x;
-		vars->player.dir_x = vars->player.dir_x
-			* cos(.1) - vars->player.dir_y * sin(.1);
-		vars->player.dir_y = olddirx * sin(.1) + vars->player.dir_y * cos(.1);
-		oldplanex = vars->player.plane_x;
-		vars->player.plane_x = vars->player.plane_x
-			* cos(.1) - vars->player.plane_y * sin(.1);
-		vars->player.plane_y = oldplanex * sin(.1)
-			+ vars->player.plane_y * cos(.1);
-	}
-	draw_stuff(*vars);
-}
+#include	"cub3d.h"
 
 void	forward(t_vars *vars)
 {

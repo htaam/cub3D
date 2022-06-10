@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:34:58 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/06 23:30:07 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/10 22:37:47 by mmota            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ void	init_vars(t_game *game)
 	game->board_height = 0;
 }
 
-
 int	error_exit(char *message)
 {
 	printf("%s\n", message);
 	exit(EXIT_FAILURE);
 }
 
-// Prints board
 void	print_board(t_game *game, int i)
 {
 	size_t	j;
@@ -50,7 +48,6 @@ void	print_board(t_game *game, int i)
 	}
 }
 
-// Exits the game and frees memory
 int	x_close(t_game *game)
 {
 	int	i;
@@ -68,10 +65,10 @@ int	x_close(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
-int *zero_array(int *array)
+int	*zero_array(int *array)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < 6)
 		array[i++] = 0;

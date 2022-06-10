@@ -6,7 +6,7 @@
 /*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:53:17 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/10 21:27:28 by mmota            ###   ########.fr       */
+/*   Updated: 2022/06/10 21:56:35 by mmota            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,10 @@ works correctly...
 #include "stdio.h"
 #include <string.h>
 
-int	all_idtypes(int *idtypes)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 6)
-	{
-		if (idtypes[i] != 1)
-			return (0);
-	}
-	return (1);
-}
 char	*get_texture_path(t_game *game, int i, char c)
 {
-	char *path;
-	int fd;
+	char	*path;
+	int		fd;
 
 	path = game->board[i];
 	while (*path != c)
@@ -87,7 +75,7 @@ int	check_textures(t_game *game, int *idtypes, int i)
 
 int	check_identifiers(t_game *game, int *idtypes)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (game->board[++i])

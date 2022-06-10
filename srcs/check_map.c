@@ -3,46 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/07 23:00:06 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/10 22:17:21 by mmota            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "stdio.h"
-
-void	get_player_pos_dir(t_vars *vars, int i, int j, char dir)
-{
-	vars->player.pos_x = i + 0.5;
-	vars->player.pos_y = j + 0.5;
-	vars->player.dir_x = -1;
-	vars->player.dir_y = 0;
-	vars->player.plane_x = 0;
-	vars->player.plane_y = 0.5;
-	if (dir == 'S')
-	{
-		vars->player.dir_x = vars->player.dir_x * cos(PI) -  vars->player.dir_y * sin(PI);
-		vars->player.dir_y = -1 * sin(PI) + vars->player.dir_y * cos(PI);
-		vars->player.plane_x = vars->player.plane_x * cos(PI) -  vars->player.plane_y * sin(PI);
-		vars->player.plane_y = 0 * sin(PI) + vars->player.plane_y * cos(PI);
-	}
-	else if (dir == 'E')
-	{
-		vars->player.dir_x = vars->player.dir_x * cos(-PI/2) -  vars->player.dir_y * sin(-PI/2);
-		vars->player.dir_y = -1 * sin(-PI/2) + vars->player.dir_y * cos(-PI/2);
-		vars->player.plane_x = vars->player.plane_x * cos(-PI/2) -  vars->player.plane_y * sin(-PI/2);
-		vars->player.plane_y = 0 * sin(-PI/2) + vars->player.plane_y * cos(-PI/2);
-	}
-	else if (dir == 'W')
-	{
-		vars->player.dir_x = vars->player.dir_x * cos(PI/2) -  vars->player.dir_y * sin(PI/2);
-		vars->player.dir_y = -1 * sin(PI/2) + vars->player.dir_y * cos(PI/2);
-		vars->player.plane_x = vars->player.plane_x * cos(PI/2) -  vars->player.plane_y * sin(PI/2);
-		vars->player.plane_y = 0 * sin(PI/2) + vars->player.plane_y * cos(PI/2);
-	}
-}
 
 void	vertical_empty_line(t_game *game, int i)
 {
@@ -72,19 +41,12 @@ void	vertical_empty_line(t_game *game, int i)
 	}
 }
 
-int	empty_line(t_game *game, int i)
+void	map_validity(t_game *game, int i, int j)
 {
-	size_t	j;
-
-	j = -1;
-	if (ft_strlen(game->board[i]) <= 0)
-		return (1);
-	while (++j < ft_strlen(game->board[i]))
-	{
-		if (ft_isalnum(game->board[i][j]))
-			return (0);
-	}
-	return (1);
+	if (game->board[i][j] != '1' && game->board[i][j] != '0' \
+	&& game->board[i][j] != 'N' && game->board[i][j] != 'S' \
+	&& game->board[i][j] != 'E' && game->board[i][j] != 'W')
+		error_exit("Map has invalid character!");
 }
 
 void	check_map_characters(t_vars *vars, t_game *game, int i)
@@ -100,10 +62,7 @@ void	check_map_characters(t_vars *vars, t_game *game, int i)
 		{
 			if (ft_isalnum(game->board[i][j]))
 			{
-				if (game->board[i][j] != '1' && game->board[i][j] != '0' \
-				&& game->board[i][j] != 'N' && game->board[i][j] != 'S' \
-				&& game->board[i][j] != 'E' && game->board[i][j] != 'W')
-					error_exit("Map has invalid character!");
+				map_validity(game, i, j);
 				if (game->board[i][j] != '1' && game->board[i][j] != '0')
 				{
 					flag = game->board[i][j];
