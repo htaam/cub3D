@@ -28,21 +28,35 @@ int min_height(double wall_distance)
 void	texture(t_vars vars, t_draw draw, t_data image, int screen_x)
 {
 	t_img NO;
-	NO.relative_path = "assets/textures/wall1.xpm";
+	double	wallY;
+	if (draw.side == 0)
+		NO.relative_path = "assets/textures/wall1.xpm";
+	else if (draw.side == 1)
+		NO.relative_path = "assets/textures/wall2.xpm";
+	else if (draw.side == 2)
+		NO.relative_path = "assets/textures/wall3.xpm";
+	else if (draw.side == 4)
+		NO.relative_path = "assets/textures/wall4.xpm";
 	NO.img = mlx_xpm_file_to_image(vars.mlx, NO.relative_path, &NO.img_width, &NO.img_height);
 	NO.data = (int *)mlx_get_data_addr(NO.img, &NO.bits_per_pixel, &NO.line_length, &NO.endian);
 	//int index = NO.line_length * NO.img_height + NO.img_width * (NO.bits_per_pixel / 8);
-
-	//printf("%i\n", index);
+	//printf("%d\n", NO.line_length);
 	int screen_y = 0;
 	while (++screen_y < ScreenHeight)
 	{
 		if (screen_y <= (min_height(draw.perpWallDist)) && screen_y >= max_height(draw.perpWallDist))
 		{
-			//my_mlx_pixel_put(&image, screen_x,
-			//	screen_y, (create_trgb(100*draw.side, draw.wallX * vars.game->board[draw.mapx][draw.mapy],
-			//			100, 0)));
-			mlx_put_image_to_window(vars.mlx, vars.win, NO.img, screen_x, screen_y);
+			wallY=(double)(screen_y - max_height(draw.perpWallDist))/(double)(min_height(draw.perpWallDist)
+															- max_height(draw.perpWallDist));
+			
+			my_mlx_pixel_put(&image, screen_x, screen_y,
+				(NO.data[ ((int)(NO.img_height * draw.wallX)) * (NO.line_length / 4) +
+					 ((int)(NO.img_width * wallY)) * ((NO.bits_per_pixel / 4) / 8)]));
+			
+			
+			
+			if (((int)(NO.img_height * wallY)) > 64)
+				printf("aqui\n");
 		}
 		else if ( screen_y  > (min_height(draw.perpWallDist)))
 		{
@@ -57,6 +71,7 @@ void	texture(t_vars vars, t_draw draw, t_data image, int screen_x)
 						100, 100)));
 		}
 	}
+	mlx_destroy_image(vars.mlx, NO.img);
 }
 
 void final_draw(t_vars vars, t_draw draw, t_data image, int screen_x)
@@ -68,11 +83,11 @@ void final_draw(t_vars vars, t_draw draw, t_data image, int screen_x)
 	{
 		if (screen_y <= (min_height(draw.perpWallDist)) && screen_y >= max_height(draw.perpWallDist))
 		{
-			wallY=(double)(screen_y - max_height(draw.perpWallDist))/(double)(min_height(draw.perpWallDist) - max_height(draw.perpWallDist));
-			//printf("%f\n", wallY);
+			wallY=(double)(screen_y - max_height(draw.perpWallDist))/(double)(min_height(draw.perpWallDist)
+															- max_height(draw.perpWallDist));
 			my_mlx_pixel_put(&image, screen_x,
-				screen_y, (create_trgb(100*draw.side, (draw.wallX) * 200,
-						wallY * 200, 0)));
+				screen_y, (create_trgb(10, (draw.wallX) * 200,
+						wallY * 200, 100 * ( (1 - draw.wallX) + (1 - wallY)))));
 		}
 		else if ( screen_y  > (min_height(draw.perpWallDist)))
 		{
@@ -83,9 +98,10 @@ void final_draw(t_vars vars, t_draw draw, t_data image, int screen_x)
 		else
 		{
 			my_mlx_pixel_put(&image, screen_x,
-				screen_y, (create_trgb(0, 200,
+				screen_y, (create_trgb(0, 100,
 						100, 100)));
 		}
+		
 	}
 }
 
@@ -178,10 +194,12 @@ void	draw_stuff(t_vars vars)
 		else
 			draw.wallX = vars.player.pos_x + draw.perpWallDist * draw.ray_dir_x;
 		draw.wallX -= floor(draw.wallX);
-		draw.wallX = 1 - draw.wallX;
+		
+		if (draw.side == 0 || draw.side == 4)
+			draw.wallX = 1 - draw.wallX;
 		//printf("%f\n", draw.wallX);
-		//texture(vars, draw, image, screen_x);
-		final_draw(vars, draw, image, screen_x);
+		texture(vars, draw, image, screen_x);
+		//final_draw(vars, draw, image, screen_x);
 		
 	}
 	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);

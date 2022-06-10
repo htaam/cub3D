@@ -43,6 +43,7 @@ int	main(int argc, char *argv[])
  	mlx_hook(vars.win, 4, 0L, mouse_hook, aux);
 	mlx_hook(vars.win, 17, (1L << 2), red_cross, aux);
 	mlx_hook(vars.win, 2, (1L << 0), key_hook, aux);
+	//mlx_loop_hook(vars.win, draw_stuff,aux);
 	mlx_loop(vars.mlx);	
 	return (0);
 }

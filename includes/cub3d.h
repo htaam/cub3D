@@ -154,5 +154,7 @@ int				*zero_array(int *array);
 
 t_img			init_textures(t_vars *vars);
 
+int		my_mlx_pixel_get(t_img *data, int x, int y);
+
 
 #endif
