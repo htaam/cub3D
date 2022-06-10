@@ -7,8 +7,8 @@ int max_height(double wall_distance)
 
     lineHeight = (int)(ScreenHeight / wall_distance);
     drawStart = -lineHeight / 2 + ScreenHeight / 2;
-    if (drawStart < 0)
-        return (0);
+    /*if (drawStart < 0)
+        return (0);*/
     return(drawStart); 
 }
 
@@ -20,13 +20,19 @@ int min_height(double wall_distance)
 
     lineHeight = (int)(ScreenHeight / wall_distance);
     drawEnd = lineHeight / 2 + ScreenHeight / 2;
-    if (drawEnd >= ScreenHeight)
-        return ( ScreenHeight - 1);
+    /*if (drawEnd >= ScreenHeight)
+        return ( ScreenHeight - 1);*/
     return(drawEnd); 
 }
 
 void	texture(t_vars vars, t_draw draw, t_data image, int screen_x)
 {
+	/* 
+	0 = S
+	1 = E
+	2 = N 
+	4 = W
+	*/
 	t_img NO;
 	double	wallY;
 	if (draw.side == 0)
@@ -34,9 +40,9 @@ void	texture(t_vars vars, t_draw draw, t_data image, int screen_x)
 	else if (draw.side == 1)
 		NO.relative_path = "assets/textures/wall2.xpm";
 	else if (draw.side == 2)
-		NO.relative_path = "assets/textures/wall3.xpm";
+		NO.relative_path = "assets/textures/wall1.xpm";
 	else if (draw.side == 4)
-		NO.relative_path = "assets/textures/wall4.xpm";
+		NO.relative_path = "assets/textures/wall1.xpm";
 	NO.img = mlx_xpm_file_to_image(vars.mlx, NO.relative_path, &NO.img_width, &NO.img_height);
 	NO.data = (int *)mlx_get_data_addr(NO.img, &NO.bits_per_pixel, &NO.line_length, &NO.endian);
 	//int index = NO.line_length * NO.img_height + NO.img_width * (NO.bits_per_pixel / 8);
@@ -44,21 +50,16 @@ void	texture(t_vars vars, t_draw draw, t_data image, int screen_x)
 	int screen_y = 0;
 	while (++screen_y < ScreenHeight)
 	{
-		if (screen_y <= (min_height(draw.perpWallDist)) && screen_y >= max_height(draw.perpWallDist))
+		if (screen_y < (min_height(draw.perpWallDist)) && screen_y > max_height(draw.perpWallDist))
 		{
-			wallY=(double)(screen_y - max_height(draw.perpWallDist))/(double)(min_height(draw.perpWallDist)
-															- max_height(draw.perpWallDist));
+			double wall_size = (double)(min_height(draw.perpWallDist) - max_height(draw.perpWallDist));
+			wallY=(double)(screen_y - max_height(draw.perpWallDist))/wall_size;
 			
 			my_mlx_pixel_put(&image, screen_x, screen_y,
-				(NO.data[ ((int)(NO.img_height * draw.wallX)) * (NO.line_length / 4) +
-					 ((int)(NO.img_width * wallY)) * ((NO.bits_per_pixel / 4) / 8)]));
-			
-			
-			
-			if (((int)(NO.img_height * wallY)) > 64)
-				printf("aqui\n");
+				(NO.data[ (((int)(NO.img_height * wallY))) * (NO.line_length / 4) +
+					 ((int)(NO.img_width * draw.wallX)) * ((NO.bits_per_pixel / 4) / 8)]));
 		}
-		else if ( screen_y  > (min_height(draw.perpWallDist)))
+		else if ( screen_y  >= (min_height(draw.perpWallDist)))
 		{
 			my_mlx_pixel_put(&image, screen_x,
 				screen_y, (create_trgb(0, 50,
