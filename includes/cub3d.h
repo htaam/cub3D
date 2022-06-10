@@ -134,6 +134,17 @@ void			forward(t_vars *vars);
 void			backward(t_vars *vars);
 void			right(t_vars *vars);
 void			left(t_vars *vars);
+
+void			draw_aux1(t_draw *draw, t_vars vars);
+void 			draw_aux2(t_draw *draw, t_vars vars, int hit);
+void 			draw_aux3(t_draw *draw, t_vars vars);
+void			draw_aux4(t_draw *draw, t_vars vars);
+void			wall_sky(t_vars vars, int screen_x, t_data image, t_draw draw);
+
+int				min_height(double wall_distance);
+int				max_height(double wall_distance);
+
+
 //--------------------------------------------------
 int				error_exit(char *message);
 int				check_map_extension(char *ext);
