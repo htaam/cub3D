@@ -85,3 +85,19 @@ void	draw_aux4(t_draw *draw, t_vars vars)
 	else
 		draw->deltaDisty = fabs(1 / draw->ray_dir_y);
 }
+
+void	wall_sky(t_vars vars, int screen_x, t_data image, t_draw draw)
+{
+	if (draw.screen_y >= (min_height(draw.perpWallDist)))
+	{
+		my_mlx_pixel_put(&image, screen_x, draw.screen_y,
+			(create_trgb(0, vars.game->rgb.fr,
+					vars.game->rgb.fg, vars.game->rgb.fb)));
+	}
+	else
+	{
+		my_mlx_pixel_put(&image, screen_x, draw.screen_y,
+			(create_trgb(0, vars.game->rgb.cr,
+					vars.game->rgb.cg, vars.game->rgb.cb)));
+	}
+}
