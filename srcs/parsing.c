@@ -49,27 +49,27 @@ int	check_textures(t_game *game, int *idtypes, int i)
 {
 	if (ft_strnstr(game->board[i], "NO ", 3) != 0)
 	{
-		game->texture.NO_path = get_texture_path(game, i, 'N');
+		game->texture.path[2] = get_texture_path(game, i, 'N');
 		idtypes[0] += 1;
-		printf("%s\n", game->texture.NO_path);
+		printf("%s\n", game->texture.path[2]);
 	}
 	if (ft_strnstr(game->board[i], "SO ", 3) != 0)
 	{
-		game->texture.SO_path = get_texture_path(game, i, 'S');
+		game->texture.path[0] = get_texture_path(game, i, 'S');
 		idtypes[1] += 1;
-		printf("%s\n", game->texture.SO_path);
+		printf("%s\n", game->texture.path[0]);
 	}
 	if (ft_strnstr(game->board[i], "WE ", 3) != 0)
 	{
-		game->texture.WE_path = get_texture_path(game, i, 'W');
+		game->texture.path[3] = get_texture_path(game, i, 'W');
 		idtypes[2] += 1;
-		printf("%s\n", game->texture.WE_path);
+		printf("%s\n", game->texture.path[3]);
 	}
 	if (ft_strnstr(game->board[i], "EA ", 3) != 0)
 	{
-		game->texture.EA_path = get_texture_path(game, i, 'E');
+		game->texture.path[1] = get_texture_path(game, i, 'E');
 		idtypes[3] += 1;
-		printf("%s\n", game->texture.EA_path);
+		printf("%s\n", game->texture.path[1]);
 	}
 	return (i);
 }

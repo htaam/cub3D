@@ -99,10 +99,7 @@ typedef struct s_rgb
 
 typedef struct s_texture
 {
-	char	*NO_path;
-	char	*SO_path;
-	char	*EA_path;
-	char	*WE_path;
+	char	*path[4];
 }				t_texture;
 
 typedef struct s_game
