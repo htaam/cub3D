@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tmatias <tmatias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/11 15:04:03 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 17:40:29 by tmatias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,16 @@ void	check_map_characters(t_vars *vars, t_game *game, int i)
 	flag = -1;
 	while (i < game->board_height)
 	{
-		j = 0;
-		while (j < ft_strlen(game->board[i]))
+		j = -1;
+		while (++j < ft_strlen(game->board[i]))
 		{
 			if (ft_isalnum(game->board[i][j]))
 			{
 				map_validity(game, i, j);
 				if (game->board[i][j] != '1' && game->board[i][j] != '0')
-				{
+				{	
+					if (flag != -1)
+						error_exit(game, "Map has more or less than one direction!");
 					flag = game->board[i][j];
 					get_player_pos_dir(vars, i, j, flag);
 				}

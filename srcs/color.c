@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tmatias <tmatias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 17:12:47 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/11 11:55:47 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 17:36:17 by tmatias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	check_rgb(t_game *game, int i, char *s)
 					error_exit(game, "No RGB value submited");
 			}
 			if (ft_isdigit(game->board[i][j + 1]) == 0)
-				error_exit(game, "Too many comas");
+				error_exit(game, "Invalid file");
 		}
 		++j;
 	}

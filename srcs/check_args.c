@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tmatias <tmatias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:36:51 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/11 12:50:11 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 17:32:19 by tmatias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	check_args(int argc, char *argv[])
 {
 	if (argc != 2)
-		exit_end("Not enough arguments!");
+		exit_end("Invalid number of arguments!");
 	if (access(argv[1], F_OK) != -1)
 		check_map_extension(argv[1]);
 	else

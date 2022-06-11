@@ -84,5 +84,4 @@ int	get_next_line(int fd, char **line)
 	if (fd < 0 || fd >= FD_MAX || !line)
 		return (-1);
 	return (read_line(fd, store, line));
-
 }

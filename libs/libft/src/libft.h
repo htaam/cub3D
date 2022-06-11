@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tmatias <tmatias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:08:49 by marmota           #+#    #+#             */
-/*   Updated: 2021/10/08 00:33:43 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 17:31:12 by tmatias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char			**ft_split(char const *s, char c);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_str_add_char(char *str, char c);	//extra
 int				ft_strstr(const char *big, const char *little); //extra
-
 
 // conversions
 int				ft_atoi(const char *nptr);
@@ -102,11 +101,11 @@ void			ft_exit(int exit_code, t_list **stack_a, t_list **stack_b);
 //extra
 
 //get_next_line
-int		get_next_line(int fd, char **line);
-char	*ft_strdup(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
+int				get_next_line(int fd, char **line);
+char			*ft_strdup(const char *s);
+size_t			ft_strlcpy(char *dst, const char *src, size_t size);
+size_t			ft_strlen(const char *s);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strchr(const char *s, int c);
 
 #endif

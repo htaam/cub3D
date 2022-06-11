@@ -58,6 +58,7 @@ void	texture(t_vars vars, t_draw draw, t_data image, int screen_x)
 		else
 			wall_sky(vars, screen_x, image, draw);
 	}
+	mlx_destroy_image(vars.mlx, no.img);
 }
 
 void	draw_stuff(t_vars vars)

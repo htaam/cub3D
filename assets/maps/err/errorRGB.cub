@@ -1,9 +1,9 @@
-NO ./path_to_the_north_texture 
-SO ./path_to_the_south_texture 
-EA ./path_to_the_east_texture 
-WE ./path_to_the_west_texture
+NO ./assets/textures/wall4.xpm
+SO ./assets/textures/wall4.xpm
+EA ./assets/textures/wall4.xpm
+WE ./assets/textures/barrel.png
 
-F 0,211,2
+F 0,211,1
 C 225,0,0
 
 

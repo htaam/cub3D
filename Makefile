@@ -1,5 +1,5 @@
 # Name of the programs built
-NAME				:=		cub3d
+NAME				:=		cub3D
 
 # Paths
 PATH_SRC			:=		srcs
