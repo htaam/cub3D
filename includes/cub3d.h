@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmatias <tmatias@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:57:38 by tmatias           #+#    #+#             */
-/*   Updated: 2022/06/11 18:44:00 by tmatias          ###   ########.fr       */
+/*   Updated: 2022/06/11 19:07:11 by mmota            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ void	check_map_characters(t_vars *vars, t_game *game, int i);
 void	map_validity(t_game *game, int i, int j);
 void	vertical_empty_line(t_game *game, int i);
 int		check_around(t_game *game, int i, int j, int id);
-
 
 //color
 void	check_rgb(t_game *game, int i, char *s);

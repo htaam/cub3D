@@ -1,6 +1,6 @@
-NO ./assets/textures/wall1.xpm
-SO ./assets/textures/wall2.xpm
-EA ./assets/textures/wall3.xpm
+NO ./assets/textures/wood.xpm
+SO ./assets/textures/purplestone.xpm
+EA ./assets/textures/bluestone.xpm
 WE ./assets/textures/wall4.xpm
 
 F 100,100,100
