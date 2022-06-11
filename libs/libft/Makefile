@@ -19,8 +19,8 @@ FLAG_WARNING		:=		-Wall -Wextra -Werror
 FLAG_INC			:= 		$(addprefix -I, $(INC_DIRS))
 FLAG_MAKEFILE		:=		-MMD -MP
 FLAG_DEBUG			:= 		-g
-FLAG_OPTIMIZATION	:=		-o3
-FLAGS_COMP			:= 		$(FLAG_WARNING) $(FLAG_INC) $(FLAG_MAKEFILE) $(FLAG_DEBUG) $(FLAG_OPTIMIZATION)
+FLAG_OPTIMIZATION	:=		-O3
+FLAGS_COMP			:= 		$(FLAG_WARNING) $(FLAG_INC) $(FLAG_MAKEFILE) $(FLAG_DEBUG)
 
 # Flags - memory leak check
 FLAG_MEM_LEAK		:= 		-fsanitize=address

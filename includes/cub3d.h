@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:57:38 by tmatias           #+#    #+#             */
-/*   Updated: 2022/06/10 22:50:19 by mmota            ###   ########.fr       */
+/*   Updated: 2022/06/11 13:08:19 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ typedef struct s_game
 	void		*mlx_win;
 	char		**board;
 	int			board_height;
-	size_t		board_width;
 	t_rgb		rgb;
 	t_texture	texture;
 }				t_game;
@@ -130,7 +129,7 @@ void	init_stuff(t_vars *vars);
 // check_sargs
 int		empty_line(t_game *game, int i);
 int		all_idtypes(int *idtypes);
-int		check_texture_extension(char *ext);
+int		check_texture_extension(t_game *game, char *ext);
 int		check_map_extension(char *ext);
 int		check_args(int argc, char *argv[]);
 
@@ -163,7 +162,7 @@ void	wall_sky(t_vars vars, int screen_x, t_data image, t_draw draw);
 //hook
 int		key_hook(int keycode, t_vars *vars);
 int		mouse_hook(int mouse_code, int x, int y, t_vars *vars);
-int		red_cross(void);
+int		red_cross(t_vars *vars);
 
 //movement
 void	forward(t_vars *vars);
@@ -191,13 +190,18 @@ void	rotate_right(t_vars *vars, double olddirx, double oldplanex);
 
 //utils
 void	init_vars(t_game *game);
-int		error_exit(char *message);
 void	print_board(t_game *game, int i);
-int		x_close(t_game *game);
 int		*zero_array(int *array);
 
 //aux
 int		create_trgb(int t, int r, int g, int b);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+//exit-free
+int		free_vars(t_vars *vars);
+int		exit_end(char *message);
+int		free_game(t_game *game);
+int		error_exit(t_game *game, char *message);
+int		error_exit2(t_vars *vars, char *message);
 
 #endif

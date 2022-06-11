@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:36:51 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/10 22:17:43 by mmota            ###   ########.fr       */
+/*   Updated: 2022/06/11 12:50:11 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 int	check_args(int argc, char *argv[])
 {
 	if (argc != 2)
-		error_exit("Not enough arguments!");
+		exit_end("Not enough arguments!");
 	if (access(argv[1], F_OK) != -1)
 		check_map_extension(argv[1]);
 	else
-		error_exit("map does not exist!");
+		exit_end("map does not exist!");
 	return (EXIT_SUCCESS);
 }
 
@@ -41,17 +41,17 @@ int	check_map_extension(char *ext)
 			if (ft_strlen(str) == 3)
 			{
 				if (ft_strncmp(&ext[i], "cub", 3) != 0)
-					error_exit("File has wrong extension!");
+					exit_end("Invalid map extension");
 				else
 					return (EXIT_SUCCESS);
 			}
 		}
 	}
-	error_exit("File has wrong extension!");
+	exit_end("File has wrong extension!");
 	return (0);
 }
 
-int	check_texture_extension(char *ext)
+int	check_texture_extension(t_game *game, char *ext)
 {
 	size_t		i;
 	char		*str;
@@ -65,7 +65,7 @@ int	check_texture_extension(char *ext)
 		{
 			str = &ext[i];
 			if (ft_strnstr(str, ".xpm", 4) == 0)
-				error_exit("File has wrong extension!");
+				error_exit(game, "File has wrong extension!");
 			else
 				return (1);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:34:58 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/10 22:37:47 by mmota            ###   ########.fr       */
+/*   Updated: 2022/06/11 11:44:06 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ void	init_vars(t_game *game)
 	game->board_height = 0;
 }
 
-int	error_exit(char *message)
-{
-	printf("%s\n", message);
-	exit(EXIT_FAILURE);
-}
-
 void	print_board(t_game *game, int i)
 {
 	size_t	j;
@@ -46,23 +40,6 @@ void	print_board(t_game *game, int i)
 		++i;
 		printf("\n");
 	}
-}
-
-int	x_close(t_game *game)
-{
-	int	i;
-
-	i = -1;
-	while (++i < game->board_height)
-		if (game->board && game->board[i])
-			free(game->board[i]);
-	if (game->board)
-		free(game->board);
-	if (game->mlx_win)
-		free(game->mlx_win);
-	if (game->mlx)
-		free(game->mlx);
-	exit(EXIT_SUCCESS);
 }
 
 int	*zero_array(int *array)

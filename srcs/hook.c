@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 15:48:36 by tmatias           #+#    #+#             */
-/*   Updated: 2022/06/03 16:01:25 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 13:07:33 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int	mouse_hook(int mouse_code, int x, int y, t_vars *vars)
 	return (mouse_code);
 }
 
-int	red_cross(void)
+int	red_cross(t_vars *vars)
 {
+	free_vars(vars);
 	exit(0);
 	return (0);
 }

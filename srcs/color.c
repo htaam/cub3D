@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmota <mmota@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 17:12:47 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/10 21:47:37 by mmota            ###   ########.fr       */
+/*   Updated: 2022/06/11 11:55:47 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	init_rgb(t_game *game, int n, char *s, int c)
 			game->rgb.fb = n;
 	}
 	if (n < 0 || n > 255)
-		error_exit("Error\nInvalid RGB value");
+		error_exit(game, "Invalid RGB value");
 }
 
 void	rgb_validity(t_game *game, int i, size_t j, int c)
@@ -43,9 +43,9 @@ void	rgb_validity(t_game *game, int i, size_t j, int c)
 	while (ft_isdigit(game->board[i][j]))
 		++j;
 	if (c != 4)
-		error_exit("Error\nNo RGB value submited!");
+		error_exit(game, "No RGB value submited!");
 	if (j < ft_strlen(game->board[i]))
-		error_exit("Error\nToo many values");
+		error_exit(game, "Too many values");
 }
 
 int	check_rgb_submit(t_game *game, int i, char *s)
@@ -60,7 +60,7 @@ int	check_rgb_submit(t_game *game, int i, char *s)
 		if (j != ft_strlen(game->board[i]))
 			++j;
 		else
-			error_exit("Error\nNo value submited");
+			error_exit(game, "No value submited");
 	}
 	return (j);
 }
@@ -84,10 +84,10 @@ void	check_rgb(t_game *game, int i, char *s)
 				if (ft_isdigit(game->board[i][j]))
 					++j;
 				else
-					error_exit("Error\nNo RGB value submited");
+					error_exit(game, "No RGB value submited");
 			}
 			if (ft_isdigit(game->board[i][j + 1]) == 0)
-				error_exit("Error\nToo many comas");
+				error_exit(game, "Too many comas");
 		}
 		++j;
 	}
