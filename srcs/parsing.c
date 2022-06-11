@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 22:53:17 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/11 12:50:14 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 13:47:04 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,8 @@ void	count_board_units(t_game *game, char *board)
 {
 	int		fd;
 	char	*line;
-	int		i;
 	int		ret;
 
-	i = 0;
 	ret = 1;
 	fd = open(board, O_RDONLY);
 	if (!fd)
@@ -104,7 +102,6 @@ void	count_board_units(t_game *game, char *board)
 	{
 		ret = get_next_line(fd, &line);
 		game->board_height++;
-		++i;
 		free(line);
 	}
 	close(fd);

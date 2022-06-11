@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:59:12 by mmota             #+#    #+#             */
-/*   Updated: 2022/06/11 12:02:59 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 14:03:24 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ int	main(int argc, char *argv[])
 	mlx_hook(vars.win, 17, (1L << 2), red_cross, aux);
 	mlx_hook(vars.win, 2, (1L << 0), key_hook, aux);
 	mlx_loop(vars.mlx);
-	free_vars(&vars);
 	return (0);
 }

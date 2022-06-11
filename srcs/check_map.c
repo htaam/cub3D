@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/11 13:04:53 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 14:59:52 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	vertical_empty_line(t_game *game, int i)
 			}
 			else
 				++i;
-			if (++space == game->board_height - start - 2)
+			if (++space == game->board_height - start - 1)
 				error_exit(game, "Board has a vertical empty line");
 		}
 	}
@@ -79,11 +79,16 @@ void	check_map_characters(t_vars *vars, t_game *game, int i)
 
 void	map_closed(t_game *game, int i, int j)
 {
+	int	a;
+	int	b;
+
+	a = i;
+	b = j;
 	if (i < game->board_height - 1)
 	{
-		if (!ft_isalnum(game->board[i - 1][j]) \
+		if ((i > a && !ft_isalnum(game->board[i - 1][j])) \
 		|| !ft_isalnum(game->board[i][j + 1]) \
-		|| !ft_isalnum(game->board[i][j - 1]) \
+		|| (j > b && !ft_isalnum(game->board[i][j - 1])) \
 		|| !ft_isalnum(game->board[i + 1][j]))
 			if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 				error_exit(game, "Board is not closed1");

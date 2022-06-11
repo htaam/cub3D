@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 15:33:22 by marmota           #+#    #+#             */
-/*   Updated: 2021/10/08 13:09:48 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 13:32:16 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	read_line(int fd, char **s, char **l)
 	char		*buf;
 
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buf[BUFFER_SIZE] = '\0';
 	br = read(fd, buf, BUFFER_SIZE);
 	while (br > 0)
 	{

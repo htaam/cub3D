@@ -1,21 +1,11 @@
-NO ./path_to_the_north_texture 
-SO ./path_to_the_south_texture 
-EA ./path_to_the_east_texture 
-WE ./path_to_the_west_texture
+NO ./assets/textures/wall1.xpm
+SO ./assets/textures/wall2.xpm
+EA ./assets/textures/wall3.xpm
+WE ./assets/textures/wall4.xpm
 
-F 220,100,0
-C 225,30,0
+F 100,100,100
+C 152,152,152
 
-
- 11111111111111111
-10000000000000001
- 10000000000000001
-10000000000000001
- 10000000000000001
- 10000000000000001
-1N000000000000001
-10000000000000001
-10000000000000001
-10000000000000001
-10000000000000001
-11111111111111111
+111
+1N1
+111
