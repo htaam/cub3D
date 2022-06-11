@@ -6,7 +6,7 @@
 /*   By: marmota <marmota@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 17:52:49 by marmota           #+#    #+#             */
-/*   Updated: 2022/06/11 14:59:52 by marmota          ###   ########.fr       */
+/*   Updated: 2022/06/11 15:04:03 by marmota          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ void	map_closed(t_game *game, int i, int j)
 
 	a = i;
 	b = j;
-	if (i < game->board_height - 1)
+	if (i < game->board_height)
 	{
 		if ((i > a && !ft_isalnum(game->board[i - 1][j])) \
 		|| !ft_isalnum(game->board[i][j + 1]) \
 		|| (j > b && !ft_isalnum(game->board[i][j - 1])) \
-		|| !ft_isalnum(game->board[i + 1][j]))
+		|| (i == game->board_height && !ft_isalnum(game->board[i + 1][j])))
 			if (ft_isalnum(game->board[i][j]) && game->board[i][j] != '1')
 				error_exit(game, "Board is not closed1");
 	}
